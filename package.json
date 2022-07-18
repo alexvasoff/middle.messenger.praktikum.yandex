@@ -1,0 +1,11 @@
+{
+  "name": "middle.messenger.praktikum.yandex",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:alexvasoff/middle.messenger.praktikum.yandex.git",
+  "author": "Aleksey Vasilev <alexvasoff@yandex.ru>",
+  "license": "MIT",
+  "devDependencies": {
+    "parcel": "^2.6.2"
+  }
+}
