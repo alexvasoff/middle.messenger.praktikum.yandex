@@ -6,3 +6,5 @@ gen
 
 .DS_Store
 node_modules
+.parcel-cache
+dist
