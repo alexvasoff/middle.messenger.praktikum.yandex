@@ -1,0 +1,27 @@
+.avatar {
+  display: inline-block;
+  position: relative;
+  &__picture {
+    height: 120px;
+    width: 120px;
+    border-radius: 50%;
+    background-color: #efefef;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &:hover {
+      background: rgba(0,0,0,0.5);
+      &:after {
+        content: 'Поменять аватар';
+        position: absolute;
+        color: #FFFFFF;
+        font-size: 1.2em;
+        text-align: center;
+      }
+    }
+
+  }
+  &__input {
+    display: none;
+  }
+}
