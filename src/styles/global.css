@@ -1,0 +1,15 @@
+html {
+  color: #1E1E1E;
+}
+
+body {
+  margin: 0;
+}
+
+h1 {
+  font-size: 20px;
+}
+
+a[class=router] {
+  text-decoration: none;
+}
