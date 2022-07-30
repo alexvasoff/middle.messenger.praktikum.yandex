@@ -1,0 +1,35 @@
+.chat-content {
+  height: 95vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+
+  &__actions {
+    transform: rotate(90deg);
+    font-size: 1.2em;
+  }
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  column-gap: 10px;
+  &__avatar {
+    height: 34px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background-color: #EFEFEF;
+  }
+  &__name {
+
+  }
+}
+
+.message-bar {
+  display: flex;
+}
