@@ -1,0 +1,12 @@
+body {
+  background: red;
+
+  & div {
+    color: wheat;
+  }
+}
+
+.rclass {
+  background: aqua;
+  padding: 10px;
+}

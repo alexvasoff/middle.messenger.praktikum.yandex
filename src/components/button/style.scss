@@ -1,0 +1,21 @@
+.button {
+  &:hover {
+    cursor: pointer;
+  }
+  &_default {
+    background: #3369F3;
+    color: #FFF;
+    border: none;
+    border-radius: 8px;
+  }
+  &_text {
+    background: none;
+    border: none;
+    color: #3369F3;
+  }
+  &_danger-text {
+    background: none;
+    border: none;
+    color: #FF0000;
+  }
+}
