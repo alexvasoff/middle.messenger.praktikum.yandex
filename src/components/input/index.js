@@ -4,7 +4,7 @@ import './style.scss'
 
 Handlebars.registerPartial('input', tpl);
 
-export default function input(name, label, placeholder, style = {}) {
+export function input(name, label, placeholder, style = {}) {
     style.width = style.width || '280px'; // длина инпута
     style.readOnly = style.readOnly || false;
     const readonly = style.readOnly ? 'readonly' : '';

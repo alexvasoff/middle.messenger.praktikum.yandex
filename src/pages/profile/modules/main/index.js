@@ -3,7 +3,7 @@ import './style.scss'
 
 import avatar from "../../../../components/avatar";
 import { button } from "../../../../components/button";
-import input from "../../../../components/input";
+import { input } from "../../../../components/input";
 
 export default function main() {
     const components = {

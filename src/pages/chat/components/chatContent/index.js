@@ -1,7 +1,7 @@
 import tpl from './tpl.hbs';
 import './style.scss';
 
-import input from "../../../../components/input";
+import { input } from "../../../../components/input";
 import { button } from "../../../../components/button";
 
 export function chatContent() {

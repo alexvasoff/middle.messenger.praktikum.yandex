@@ -1,7 +1,7 @@
 import tpl from './tpl.hbs';
 
 import { button } from "../../components/button";
-import input from "../../components/input";
+import { input } from "../../components/input";
 
 export default function registration() {
     const components = {
