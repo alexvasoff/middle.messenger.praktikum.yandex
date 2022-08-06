@@ -11,7 +11,6 @@ export default function changePassword() {
         oldPassword: input('oldPassword', 'Старый пароль'),
         newPassword: input('newPassword', 'Новый пароль'),
         newPasswordGuard: input('newPasswordGuard', 'Повторите новый пароль'),
-        //
         savaChanges: button('savaChanges', 'Сохранить изменения'),
         back: button('back', 'Назад', 'danger-text'),
     };

@@ -12,7 +12,6 @@ export default function registration() {
         phone: input('phone', 'Телефон', 'Введите телефон'),
         password: input('password', 'Пароль', 'Введите пароль'),
         passwordGuard: input('passwordGuard', 'Пароль (ещё раз)', 'Повторите пароль'),
-        //
         registration: button('registration', 'Регистрация'),
         sign: button('sign', 'Вход', 'text'),
     };
