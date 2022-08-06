@@ -22,7 +22,7 @@
 
 ## История разработки
 
-### Спринт 1 [active]
+### Спринт 1
 
 - Подготовлен прототип дизайна в [Фигме](https://www.figma.com/file/Lc4oD2ZwpXz7u4vHm5stzk/Chat-(Copy)?node-id=0%3A1)
 - Подготовлена структура папок проекта
@@ -32,3 +32,7 @@
 - Настроены взаимодействия с [Git](https://github.com/alexvasoff/middle.messenger.praktikum.yandex) и [Netlify](https://stately-moxie-909101.netlify.app)
 - Настроен локальный сервер на Express
 - Сконфигурирован сборщик проекта Parcel для взаимодействия с шаблонизатором Handlebars и препроцессором SCSS
+
+### Спринт 2 [active]
+
+- Подключение ESLint
