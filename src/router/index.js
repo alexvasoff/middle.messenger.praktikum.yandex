@@ -1,7 +1,7 @@
 import login from "../pages/login";
 import registration from "../pages/registration";
 import { chat } from "../pages/chat";
-import profile from "../pages/profile";
+import { profile }  from "../pages/profile";
 import editData from "../pages/profile/modules/editData";
 import changePassword from "../pages/profile/modules/changePassword";
 import notFound from "../pages/notFound";
