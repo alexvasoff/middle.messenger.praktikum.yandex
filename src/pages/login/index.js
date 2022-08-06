@@ -1,6 +1,6 @@
 import tpl from './tpl.hbs';
 
-import button from "../../components/button";
+import { button } from "../../components/button";
 import input from "../../components/input";
 
 
