@@ -1,5 +1,5 @@
-import { EventBus } from '../eventBus';
 import { v4 as makeUUID } from 'uuid';
+import { EventBus } from '../eventBus';
 
 // Нельзя создавать экземпляр данного класса
 class BaseBlock {
@@ -9,29 +9,64 @@ class BaseBlock {
     FLOW_CDU: 'flow:component-did-update',
     FLOW_RENDER: 'flow:render',
   };
+
   private _id = makeUUID();
-  private _element = null;
 
-  private _meta = null;
+  private _element;
 
-  private props = null;
+  private _meta = {};
 
-  private eventBus = null;
+  public props = {};
 
-  constructor(tagName = 'div', props = {}) {
+  public children = {};
+
+  public eventBus;
+
+  constructor(tagName = 'div', propsAndChildren = {}) {
     const eventBus = new EventBus();
+    const { children, props } = this._getChildren(propsAndChildren);
 
     this._meta = {
       tagName,
       props,
+      children,
     };
 
     this.props = this._makePropsProxy({ ...props, __id: this._id });
+    this.children = children;
 
     this.eventBus = () => eventBus;
 
     this._registerEvents(eventBus);
     eventBus.emit(BaseBlock.EVENTS.INIT);
+  }
+
+  _getChildren(propsAndChildren) {
+    const children = {};
+    const props = {};
+    Object.entries(propsAndChildren).forEach(([key, value]) => {
+      if (value instanceof BaseBlock) {
+        children[key] = value;
+      } else {
+        props[key] = value;
+      }
+    });
+
+    return { children, props };
+  }
+
+  compile(template, props) {
+    const propsAndStubs = { ...props };
+    Object.entries(this.children).forEach(([key, child]) => {
+      propsAndStubs[key] = `<div data-id="${child._id}"></div>`;
+    });
+    const fragment = this._createDocumentElement('template');
+    fragment.innerHTML = template(propsAndStubs);
+    Object.values(this.children).forEach(child => {
+      const stub = fragment.content.querySelector(`[data-id="${child.id}"]`);
+      stub.replaceWith(child.getContent());
+    });
+    return fragment.content;
   }
 
   _registerEvents(eventBus) {
@@ -71,6 +106,9 @@ class BaseBlock {
 
   _componentDidMount() {
     this.componentDidMount();
+    Object.values(this.children).forEach(child => {
+      child.dispatchComponentDidMount();
+    });
   }
 
   componentDidMount(oldProps) {
@@ -108,7 +146,12 @@ class BaseBlock {
   _render() {
     const block = this.render();
     this._removeEvents();
-    this._element.innerHTML = block;
+    if (typeof block !== 'string') {
+      this._element.innerHTML = '';
+      this._element.appendChild(block);
+    } else {
+      this._element.innerHTML = block;
+    }
     this._addEvents();
   }
 
