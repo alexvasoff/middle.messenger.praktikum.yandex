@@ -1,4 +1,5 @@
 import { EventBus } from '../eventBus';
+import { v4 as makeUUID } from 'uuid';
 
 // Нельзя создавать экземпляр данного класса
 class BaseBlock {
@@ -8,7 +9,7 @@ class BaseBlock {
     FLOW_CDU: 'flow:component-did-update',
     FLOW_RENDER: 'flow:render',
   };
-
+  private _id = makeUUID();
   private _element = null;
 
   private _meta = null;
@@ -25,7 +26,7 @@ class BaseBlock {
       props,
     };
 
-    this.props = this._makePropsProxy(props);
+    this.props = this._makePropsProxy({ ...props, __id: this._id });
 
     this.eventBus = () => eventBus;
 
@@ -59,7 +60,9 @@ class BaseBlock {
   }
 
   _createDocumentElement(tagName) {
-    return document.createElement(tagName);
+    const element = document.createElement(tagName);
+    element.setAttribute('data-id', this._id);
+    return element;
   }
 
   dispatchComponentDidMount() {
