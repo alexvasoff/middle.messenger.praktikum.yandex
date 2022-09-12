@@ -1,3 +1,5 @@
+import { InputFieldName } from '../../components/input/types';
+
 export const nameReg = /^[A-ZА-Я]+[a-zа-яA-ZА-Я-]{2,19}/;
 export const loginReg = /(?=.*[a-zA-Z])[a-zA-Z0-9\\_-]{2,19}/;
 export const emailReg = /^[\w\d]+@\w+\.\w+/;
@@ -13,8 +15,6 @@ export const regExp = {
   phone: phoneReg,
   message: messageReg,
 };
-
-type InputFieldName = 'name' | 'login' | 'email' | 'password' | 'phone' | 'message';
 
 export function validate(fieldName: InputFieldName, value: string) : boolean {
   if (!(fieldName in regExp)) {
