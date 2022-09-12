@@ -1,5 +1,5 @@
 export type Props = {
   name: string;
   text: string;
-  type?: string;
+  type?: 'default' | 'text' | 'danger-text';
 };
