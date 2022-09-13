@@ -115,11 +115,10 @@ class BaseBlock {
     Object.values(this.children).forEach(child => {
       child.dispatchComponentDidMount();
     });
-  }
-
-  componentDidMount(oldProps) {
     this.eventBus().emit(BaseBlock.EVENTS.FLOW_RENDER);
   }
+
+  componentDidMount(oldProps) { }
 
   _componentDidUpdate(oldProps, newProps) {
     const response = this.componentDidUpdate(oldProps, newProps);
