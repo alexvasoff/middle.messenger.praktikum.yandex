@@ -63,13 +63,14 @@ class BaseBlock {
 
   compile(template, props) {
     const propsAndStubs = { ...props };
+    console.log(propsAndStubs);
     Object.entries(this.children).forEach(([key, child]) => {
       propsAndStubs[key] = `<div data-id="${child._id}"></div>`;
     });
     const fragment = this._createDocumentElement('template');
     fragment.innerHTML = template(propsAndStubs);
     Object.values(this.children).forEach(child => {
-      const stub = fragment.content.querySelector(`[data-id="${child.id}"]`);
+      const stub = fragment.content.querySelector(`[data-id="${child._id}"]`);
       stub.replaceWith(child.getContent());
     });
     return fragment.content;
