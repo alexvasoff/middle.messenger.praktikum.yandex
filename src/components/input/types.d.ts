@@ -4,7 +4,7 @@ export type Props = {
   name: InputFieldName;
   label: string;
   placeholder: string;
-  style: {
+  style?: {
     width: string
     readOnly: boolean
   }
