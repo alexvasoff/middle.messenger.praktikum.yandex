@@ -201,11 +201,6 @@ class BaseBlock {
   }
 
   hide() {
-    if (true) {
-      this.setProps({
-        className: 'hide',
-      });
-    }
     this.getContent().style.display = 'none';
   }
 }
