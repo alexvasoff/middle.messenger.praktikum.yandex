@@ -2,7 +2,7 @@ type Event = string;
 type Callback = (...args: unknown[]) => void;
 
 class EventBus {
-  listeners: Record<string, Callback[]>;
+  listeners: Record<string, Callback[]> = {};
 
   // constructor() {
   // }
