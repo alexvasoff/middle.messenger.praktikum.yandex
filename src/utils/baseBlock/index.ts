@@ -1,6 +1,12 @@
 import { v4 as makeUUID } from 'uuid';
 import { EventBus } from '../eventBus';
 
+export type BaseProps = {
+  eventsTo? : string;
+  events? : Record<string, Function>;
+  [key: string | number]: any;
+}
+
 // Нельзя создавать экземпляр данного класса
 class BaseBlock {
   static EVENTS = {
@@ -16,13 +22,13 @@ class BaseBlock {
 
   private _meta = {};
 
-  public props = {};
+  public props: BaseProps = {};
 
   public children = {};
 
   public eventBus;
 
-  constructor(tagName = 'div', propsAndChildren = {}) {
+  constructor(tagName = 'div', propsAndChildren: BaseProps = {}) {
     const eventBus = new EventBus();
     const { children, props } = this._getChildren(propsAndChildren);
 
@@ -43,7 +49,7 @@ class BaseBlock {
 
   _getChildren(propsAndChildren) {
     const children = {};
-    const props = {};
+    const props: BaseProps = {};
     Object.entries(propsAndChildren).forEach(([key, value]) => {
       if (value instanceof BaseBlock) {
         children[key] = value;
