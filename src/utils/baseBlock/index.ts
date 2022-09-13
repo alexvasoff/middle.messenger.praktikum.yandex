@@ -107,7 +107,7 @@ class BaseBlock {
   }
 
   dispatchComponentDidMount() {
-    this._eventBus().emit(BaseBlock.EVENTS.FLOW_CMD);
+    this.eventBus().emit(BaseBlock.EVENTS.FLOW_CMD);
   }
 
   _componentDidMount() {
