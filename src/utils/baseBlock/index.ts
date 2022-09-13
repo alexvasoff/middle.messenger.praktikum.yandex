@@ -136,8 +136,13 @@ class BaseBlock {
   _addEvents() {
     const { events = {} } = this.props;
 
+    const directElementName = this.props.eventsTo;
+    const directElement = directElementName
+      ? this._element.querySelector(directElementName)
+      : this._element;
+
     Object.keys(events).forEach(eventName => {
-      this._element.addEventListener(eventName, events[eventName]);
+      directElement.addEventListener(eventName, events[eventName]);
     });
   }
 
