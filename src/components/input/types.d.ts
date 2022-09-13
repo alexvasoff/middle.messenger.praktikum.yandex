@@ -1,6 +1,7 @@
 export type InputFieldName = 'name' | 'login' | 'email' | 'password' | 'phone' | 'message';
 
-export type Props = {
+export interface Props extends BaseProps {
+  events: { blur: () => void; focus: () => void };
   name: InputFieldName;
   label: string;
   placeholder: string;
