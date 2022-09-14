@@ -9,6 +9,8 @@ export const messageReg = /.*/;
 
 export const regExp = {
   name: nameReg,
+  first_name: nameReg,
+  second_name: nameReg,
   login: loginReg,
   email: emailReg,
   password: passwordReg,
