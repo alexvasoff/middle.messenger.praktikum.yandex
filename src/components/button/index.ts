@@ -5,6 +5,7 @@ import { Props } from "./types";
 
 export class Button extends BaseBlock {
   constructor(props: Props) {
+    props.type ||= 'default';
     super('div', props);
   }
 
