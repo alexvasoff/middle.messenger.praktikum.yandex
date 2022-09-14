@@ -14,6 +14,7 @@ export const regExp = {
   login: loginReg,
   email: emailReg,
   password: passwordReg,
+  passwordGuard: passwordReg,
   phone: phoneReg,
   message: messageReg,
 };
