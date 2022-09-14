@@ -16,7 +16,11 @@ function declareInputEvents(props: InputProps) {
 
     if (!isValid) {
       console.log(`Поле ${props.label} заполнено не по формату!`);
+    } else {
+      console.log(`Поле ${props.label} заполнено правильно!`);
     }
+
+    return isValid;
   };
 
   const events = {
