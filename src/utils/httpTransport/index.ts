@@ -13,10 +13,10 @@ function queryStringify(data) {
   }
 
   // Здесь достаточно и [object Object] для объекта
-  return '?' + Object
+  return `?${Object
     .entries(data)
     .map(([key, value]) => `${key}=${value}`)
-    .join('&');
+    .join('&')}`;
 }
 
 export class HTTPTransport {
