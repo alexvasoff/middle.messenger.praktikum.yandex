@@ -1,27 +1,30 @@
-import login from '../pages/login';
-import registration from '../pages/registration';
-import { chat } from '../pages/chat';
-import { profile } from '../pages/profile';
-import { editData } from '../pages/profile/modules/editData';
-import { changePassword } from '../pages/profile/modules/changePassword';
+import { LoginPage } from '../pages/login';
+import { RegistrationPage } from '../pages/registration';
+import { ChatPage } from '../pages/chat';
+import { ProfileMainPage } from '../pages/profile/modules/main';
+import { ProfileEditDataPage } from '../pages/profile/modules/editData';
+import { ProfileChangePasswordPage } from '../pages/profile/modules/changePassword';
 import notFound from '../pages/notFound';
 import serverError from '../pages/serverError';
+import { Router } from '../utils/router/router';
 
-const routes = {
-  '/': login,
-  '/register': registration,
-  '/chat': chat,
-  '/settings': profile,
-  '/changeData': editData,
-  '/changePassword': changePassword,
+const routesMap = {
+  '/': LoginPage,
+  '/register': RegistrationPage,
+  '/chat': ChatPage,
+  '/settings': ProfileMainPage,
+  '/changeData': ProfileEditDataPage,
+  '/changePassword': ProfileChangePasswordPage,
   '/notFound': notFound,
   '/serverError': serverError,
 };
 
-function getPage() {
-  const currentPath = window.location.pathname;
-  const page = routes[currentPath];
-  return page() || routes['/notFound']();
-}
+const router = new Router('#root');
 
-export default getPage;
+Object.entries(routesMap).forEach(([path, block]) => {
+  router.use(path, block);
+});
+
+console.log(router);
+
+router.start();
