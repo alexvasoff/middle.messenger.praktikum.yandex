@@ -6,6 +6,8 @@ import { Input } from '../../components/input';
 import { Props as InputProps } from '../../components/input/types';
 import { Props as LoginPageProps } from './types';
 import { BaseBlock } from '../../utils/baseBlock';
+import { router } from '../../router';
+import { UserAuthController } from '../../utils/apiControllers/userAuth';
 
 const loginInputProps: InputProps = {
   name: 'login',
@@ -19,9 +21,28 @@ const passInputProps: InputProps = {
   placeholder: 'Введите пароль',
 };
 
+async function onLogin() {
+  const login = document.getElementById(loginInputProps.name).value;
+  const password = document.getElementById(passInputProps.name).value;
+  if (!(login && password)) {
+    console.log('Не указан логин или пароль');
+    return;
+  }
+  const authApi = new UserAuthController();
+  const response = await authApi.login({ login, password });
+  if (response.status !== 200) {
+    console.log('Ошибка в логине или пароле');
+    return;
+  }
+  router.go('/chat');
+}
+
 const signButtonProps: ButtonProps = {
   name: 'sign',
   text: 'Вход',
+  events: {
+    click: onLogin,
+  },
 };
 
 const registerButtonProps: ButtonProps = {
