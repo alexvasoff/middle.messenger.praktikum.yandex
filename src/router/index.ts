@@ -28,3 +28,5 @@ Object.entries(routesMap).forEach(([path, block]) => {
 console.log(router);
 
 router.start();
+
+export { router };
