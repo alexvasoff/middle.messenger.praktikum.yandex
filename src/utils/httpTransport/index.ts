@@ -25,7 +25,7 @@ export class HTTPTransport {
     method: METHODS.GET,
   }, options.timeout);
 
-  post = (url, options = {}) => this.request(url, { ...options, method: METHODS.POST }, options.timeout);
+  post = (url, options = {}) => this.request(url, { ...options, headers: { 'Content-Type': 'application/json' }, method: METHODS.POST }, options.timeout);
 
   put = (url, options = {}) => this.request(url, { ...options, method: METHODS.PUT }, options.timeout);
 
@@ -63,6 +63,8 @@ export class HTTPTransport {
 
       xhr.timeout = timeout;
       xhr.ontimeout = reject;
+
+      xhr.withCredentials = true;
 
       if (isGet || !data) {
         xhr.send();
