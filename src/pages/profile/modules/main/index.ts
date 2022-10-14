@@ -39,7 +39,20 @@ const components = {
   }),
   changePassword: new Button({ name: 'changePassword', text: 'Изменить пароль' }),
   back: new Button({ name: 'back', text: 'Назад', type: 'text' }),
-  exit: new Button({ name: 'exit', text: 'Выйти', type: 'danger-text' }),
+  exit: new Button({
+    name: 'exit',
+    text: 'Выйти',
+    type: 'danger-text',
+    events: {
+      click: async () => {
+        const authApi = new UserAuthController();
+        const response = await authApi.logout();
+        if (response.status === 200) {
+          router.go('/');
+        }
+      },
+    },
+  }),
 };
 
 export class ProfileMainPage extends BaseBlock {

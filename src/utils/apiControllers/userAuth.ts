@@ -1,6 +1,7 @@
 import { HTTPTransport } from '../httpTransport';
 import { apiPath } from './apiPath';
 import { store } from '../store';
+import {router} from "../../router";
 
 interface loginData {
   login: string;
@@ -19,7 +20,7 @@ interface signUp {
 const request = new HTTPTransport();
 
 export class UserAuthController {
-  public async login(data: loginData) {
+  public login(data: loginData) {
     const options = {
       credentials: 'include',
       data: JSON.stringify(data),
@@ -27,7 +28,7 @@ export class UserAuthController {
     return request.post(apiPath.login, options);
   }
 
-  public async signUp(data: signUp) {
+  public signUp(data: signUp) {
     const options = {
       credentials: 'include',
       data: JSON.stringify(data),
@@ -35,7 +36,7 @@ export class UserAuthController {
     return request.post(apiPath.signUp, options);
   }
 
-  public async getInfo() {
+  public getInfo() {
     const cache = store.getState().me;
     if (cache && Object.keys(cache)) {
       console.log('есть кэш');
@@ -54,6 +55,7 @@ export class UserAuthController {
           if (response.status !== 200) {
             console.log(response.status !== 200);
             console.log('Что-то пошло не так');
+            router.go('/');
             reject(response);
           }
           userInfo = JSON.parse(response.response);
@@ -64,5 +66,9 @@ export class UserAuthController {
         resolve(userInfo);
       });
     });
+  }
+
+  public logout() {
+    return request.post(apiPath.logout);
   }
 }
