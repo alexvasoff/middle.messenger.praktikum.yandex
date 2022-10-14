@@ -77,7 +77,6 @@ export class ChatPage extends BaseBlock {
     const chatsPlace = document.getElementsByClassName('dialogs')[0];
     const fragment = document.createDocumentFragment();
     for (const chat of chats) {
-      console.log(chat);
       const newChat = document.createElement('p');
       newChat.innerText = chat.title;
       newChat.onclick = () => {

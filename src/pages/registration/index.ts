@@ -11,7 +11,6 @@ async function onRegister() {
   const inputFields = document.getElementsByTagName('input');
   const params = {};
   for (const inputField of inputFields) {
-    console.log(inputField);
     params[inputField.name] = inputField.value;
   }
   const authApi = new UserAuthController();

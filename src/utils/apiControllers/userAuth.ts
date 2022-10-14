@@ -37,21 +37,15 @@ export class UserAuthController {
   public getInfo() {
     const cache = store.getState().me;
     if (cache && Object.keys(cache)) {
-      console.log('есть кэш');
       return new Promise(resolve => {
         resolve(cache);
       });
     }
     return new Promise((resolve, reject) => {
-      console.log('123');
       request.get(apiPath.getUser, {}).then(response => {
-        console.log(response);
         let userInfo = null;
         if (response instanceof XMLHttpRequest) {
-          console.log(response);
-          console.log(response.status);
           if (response.status !== 200) {
-            console.log(response.status !== 200);
             console.log('Что-то пошло не так');
             router.go('/');
             reject(response);

@@ -19,7 +19,6 @@ function goBack() {
 
 function editData() {
   const formData = getFormData();
-  console.log(formData);
   profileApi.editData(formData);
 }
 
@@ -60,7 +59,6 @@ export class ProfileEditDataPage extends BaseBlock {
 
   async componentDidMount(oldProps) {
     const userInfo = await authApi.getInfo();
-    console.log(userInfo);
     const inputFields = document.getElementsByTagName('input');
     for (const inputField of inputFields) {
       const fieldName = inputField.name;

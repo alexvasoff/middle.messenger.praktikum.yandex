@@ -25,8 +25,6 @@ Object.entries(routesMap).forEach(([path, block]) => {
   router.use(path, block);
 });
 
-console.log(router);
-
 router.start();
 
 export { router };

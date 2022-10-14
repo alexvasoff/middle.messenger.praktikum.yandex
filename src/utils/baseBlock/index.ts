@@ -63,7 +63,6 @@ class BaseBlock {
 
   compile(template, props) {
     const propsAndStubs = { ...props };
-    console.log(propsAndStubs);
     Object.entries(this.children).forEach(([key, child]) => {
       propsAndStubs[key] = `<div data-id="${child._id}"></div>`;
     });
