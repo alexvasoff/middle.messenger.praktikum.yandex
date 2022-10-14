@@ -55,6 +55,7 @@ export class UserAuthController {
             console.log('Что-то пошло не так');
             router.go('/');
             reject(response);
+            return;
           }
           userInfo = JSON.parse(response.response);
           store.set('me', userInfo);
