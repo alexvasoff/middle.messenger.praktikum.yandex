@@ -6,14 +6,35 @@ import { Button } from '../../../../components/button';
 import { Input } from '../../../../components/input';
 import { BaseBlock } from '../../../../utils/baseBlock';
 import { Props } from './types';
-import { renderDOM } from '../../../../utils/renderDOM';
+import { UserProfileController } from '../../../../utils/apiControllers/userProfile';
+import { getFormData } from '../../../../utils/getFormData';
+import { router } from '../../../../router';
+
+async function onChangePass() {
+  const params = getFormData();
+  const profileApi = new UserProfileController();
+  const response = await profileApi.changePassword(params);
+  if (response !== 200) {
+    console.log('Не удалось поменять пароль!');
+    console.log(response);
+    return;
+  }
+  console.log('Вы успешно изменили пароль!');
+  router.back();
+}
 
 const props: Props = {
   avatar: new Avatar(),
   oldPassword: new Input({ name: 'oldPassword', label: 'Старый пароль' }),
   newPassword: new Input({ name: 'newPassword', label: 'Новый пароль' }),
   newPasswordGuard: new Input({ name: 'newPasswordGuard', label: 'Повторите новый пароль' }),
-  savaChanges: new Button({ name: 'savaChanges', text: 'Сохранить изменения' }),
+  savaChanges: new Button({
+    name: 'savaChanges',
+    text: 'Сохранить изменения',
+    events: {
+      click: onChangePass,
+    },
+  }),
   back: new Button({ name: 'back', text: 'Назад', type: 'danger-text' }),
 };
 
