@@ -15,7 +15,6 @@ const request = new HTTPTransport();
 export class UserProfileController {
   public editData(data: editData) {
     const options = {
-      credentials: 'include',
       data: JSON.stringify(data),
     };
     return request.put(apiPath.editData, options);

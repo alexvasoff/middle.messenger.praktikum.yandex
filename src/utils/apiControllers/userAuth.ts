@@ -1,7 +1,7 @@
 import { HTTPTransport } from '../httpTransport';
 import { apiPath } from './apiPath';
 import { store } from '../store';
-import {router} from "../../router";
+import { router } from '../../router';
 
 interface loginData {
   login: string;
@@ -22,7 +22,6 @@ const request = new HTTPTransport();
 export class UserAuthController {
   public login(data: loginData) {
     const options = {
-      credentials: 'include',
       data: JSON.stringify(data),
     };
     return request.post(apiPath.login, options);
@@ -30,7 +29,6 @@ export class UserAuthController {
 
   public signUp(data: signUp) {
     const options = {
-      credentials: 'include',
       data: JSON.stringify(data),
     };
     return request.post(apiPath.signUp, options);
