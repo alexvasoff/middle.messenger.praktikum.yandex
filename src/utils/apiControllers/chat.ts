@@ -20,6 +20,6 @@ export class ChatController {
   }
 
   public getChatToken(id: string) {
-    return request.get(apiPath.getChatToken + id);
+    return request.post(apiPath.getChatToken + id);
   }
 }
