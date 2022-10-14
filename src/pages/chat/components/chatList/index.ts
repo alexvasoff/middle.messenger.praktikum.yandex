@@ -5,6 +5,9 @@ import { Button } from '../../../../components/button';
 import { Input } from '../../../../components/input';
 import { BaseBlock } from '../../../../utils/baseBlock';
 import { router } from '../../../../router';
+import { ChatController } from '../../../../utils/apiControllers/chat';
+
+const chatApi = new ChatController();
 
 class ChatList extends BaseBlock {
   constructor(props) {
@@ -13,6 +16,17 @@ class ChatList extends BaseBlock {
 
   render() {
     return this.compile(tpl, this.props);
+  }
+}
+
+async function addChat() {
+  const chatName = window.prompt('Введите название чата:', `Чат ${new Date().getSeconds()}`);
+  if (!chatName) {
+    return;
+  }
+  const response = await chatApi.createChat({ title: chatName });
+  if (response.status !== 200) {
+    console.log('Не удалось создать чат');
   }
 }
 
@@ -27,7 +41,14 @@ export function chatList() {
         },
       },
     }),
-    createChat: new Button({ name: 'createChat', text: 'Создать чат', type: 'text' }),
+    createChat: new Button({
+      name: 'createChat',
+      text: 'Создать чат',
+      type: 'text',
+      events: {
+        click: addChat,
+      },
+    }),
     search: new Input({ name: 'search', placeholder: 'Поиск' }),
   };
   const chatListComponent = new ChatList(props);

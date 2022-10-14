@@ -31,4 +31,8 @@ export class UserProfileController {
     };
     return request.put(apiPath.changePassword, options);
   }
+
+  public changeAvatar(data) {
+    return request.put(apiPath.changeAvatar, { data });
+  }
 }
