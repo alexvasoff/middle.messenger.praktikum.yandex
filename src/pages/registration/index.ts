@@ -6,13 +6,10 @@ import { BaseBlock } from '../../utils/baseBlock';
 import { Props as RegistrationProps } from './types';
 import { router } from '../../router';
 import { UserAuthController } from '../../utils/apiControllers/userAuth';
+import { getFormData } from '../../utils/getFormData';
 
 async function onRegister() {
-  const inputFields = document.getElementsByTagName('input');
-  const params = {};
-  for (const inputField of inputFields) {
-    params[inputField.name] = inputField.value;
-  }
+  const params = getFormData();
   const authApi = new UserAuthController();
   const response = await authApi.signUp(params);
   if (response.status !== 200) {
