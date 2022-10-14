@@ -7,9 +7,20 @@ import { Button } from '../../../../components/button';
 import { Props } from './types';
 import { router } from '../../../../router';
 import { UserAuthController } from '../../../../utils/apiControllers/userAuth';
+import { UserProfileController } from '../../../../utils/apiControllers/userProfile';
+import { getFormData } from '../../../../utils/getFormData';
+
+const authApi = new UserAuthController();
+const profileApi = new UserProfileController();
 
 function goBack() {
   router.back();
+}
+
+function editData() {
+  const formData = getFormData();
+  console.log(formData);
+  profileApi.editData(formData);
 }
 
 const props: Props = {
@@ -23,6 +34,9 @@ const props: Props = {
   savaChanges: new Button({
     name: 'savaChanges',
     text: 'Сохранить изменения',
+    events: {
+      click: editData,
+    },
   }),
   back: new Button({
     name: 'back',
@@ -37,22 +51,23 @@ const props: Props = {
 export class ProfileEditDataPage extends BaseBlock {
   constructor() {
     super('div', props);
-    const authApi = new UserAuthController();
     // тут ожидается, что данные уже в кэше (если перешли с основной страницы настроек)
-    authApi.getInfo().then(userInfo => {
-      console.log(userInfo);
-      const inputFields = document.getElementsByTagName('input');
-      for (const inputField of inputFields) {
-        const fieldName = inputField.name;
-        if (!userInfo[fieldName]) {
-          continue;
-        }
-        inputField.value = userInfo[fieldName];
-      }
-    });
   }
 
   render() {
     return this.compile(tpl, this.props);
+  }
+
+  async componentDidMount(oldProps) {
+    const userInfo = await authApi.getInfo();
+    console.log(userInfo);
+    const inputFields = document.getElementsByTagName('input');
+    for (const inputField of inputFields) {
+      const fieldName = inputField.name;
+      if (!userInfo[fieldName]) {
+        continue;
+      }
+      inputField.value = userInfo[fieldName];
+    }
   }
 }
