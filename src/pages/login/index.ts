@@ -28,6 +28,7 @@ async function onLogin() {
   const password = document.getElementById(passInputProps.name).value;
   if (!(login && password)) {
     console.log('Не указан логин или пароль');
+    console.log('*Если все указано, то, пожалуйста, перезагрузите страницу');
     return;
   }
   const response = await authApi.login({ login, password });
@@ -50,6 +51,11 @@ const registerButtonProps: ButtonProps = {
   name: 'register',
   text: 'Регистрация',
   type: 'text',
+  events: {
+    click() {
+      router.go('/register');
+    },
+  },
 };
 
 const components: LoginPageProps = {

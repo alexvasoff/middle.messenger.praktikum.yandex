@@ -20,7 +20,7 @@ async function onChangePass() {
     return;
   }
   console.log('Вы успешно изменили пароль!');
-  router.back();
+  router.go('/settings');
 }
 
 const props: Props = {
@@ -35,7 +35,16 @@ const props: Props = {
       click: onChangePass,
     },
   }),
-  back: new Button({ name: 'back', text: 'Назад', type: 'danger-text' }),
+  back: new Button({
+    name: 'back',
+    text: 'Назад',
+    type: 'danger-text',
+    events: {
+      click: () => {
+        router.go('/settings');
+      },
+    },
+  }),
 };
 
 export class ProfileChangePasswordPage extends BaseBlock {

@@ -37,8 +37,25 @@ const components = {
       },
     },
   }),
-  changePassword: new Button({ name: 'changePassword', text: 'Изменить пароль' }),
-  back: new Button({ name: 'back', text: 'Назад', type: 'text' }),
+  changePassword: new Button({
+    name: 'changePassword',
+    text: 'Изменить пароль',
+    events: {
+      click: () => {
+        router.go('/changePassword');
+      },
+    },
+  }),
+  back: new Button({
+    name: 'back',
+    text: 'Назад',
+    type: 'text',
+    events: {
+      click: () => {
+        router.go('/messenger');
+      },
+    },
+  }),
   exit: new Button({
     name: 'exit',
     text: 'Выйти',
