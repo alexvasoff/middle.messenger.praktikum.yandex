@@ -74,10 +74,8 @@ export class ChatPage extends BaseBlock {
   }
 
   renderChats(chats) {
-    console.log('asdsadasdas');
-    console.log(chats);
     const chatsPlace = document.getElementsByClassName('dialogs')[0];
-    console.log(chatsPlace);
+    const fragment = document.createDocumentFragment();
     for (const chat of chats) {
       console.log(chat);
       const newChat = document.createElement('p');
@@ -85,9 +83,9 @@ export class ChatPage extends BaseBlock {
       newChat.onclick = () => {
         this.openChat(chat);
       };
-      chatsPlace.append(newChat);
+      fragment.append(newChat);
     }
-    // const a = document.createElement(p);
+    chatsPlace.append(fragment);
   }
 
   async componentDidMount(oldProps) {
@@ -97,7 +95,6 @@ export class ChatPage extends BaseBlock {
       return;
     }
     const chats = JSON.parse(response.response);
-    console.log('Список чатов:', chats);
     this.renderChats(chats);
   }
 }
