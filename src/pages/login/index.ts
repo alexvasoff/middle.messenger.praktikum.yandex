@@ -34,7 +34,7 @@ async function onLogin() {
     console.log('Ошибка в логине или пароле');
     return;
   }
-  router.go('/chat');
+  router.go('/messenger');
 }
 
 const signButtonProps: ButtonProps = {

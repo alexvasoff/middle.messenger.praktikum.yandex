@@ -11,7 +11,7 @@ import { Router } from '../utils/router/router';
 const routesMap = {
   '/': LoginPage,
   '/register': RegistrationPage,
-  '/chat': ChatPage,
+  '/messenger': ChatPage,
   '/settings': ProfileMainPage,
   '/changeData': ProfileEditDataPage,
   '/changePassword': ProfileChangePasswordPage,
