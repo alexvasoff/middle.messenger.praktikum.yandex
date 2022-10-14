@@ -62,7 +62,8 @@ export class ProfileEditDataPage extends BaseBlock {
     const inputFields = document.getElementsByTagName('input');
     for (const inputField of inputFields) {
       const fieldName = inputField.name;
-      if (!userInfo[fieldName]) {
+      console.log(fieldName);
+      if (!userInfo[fieldName] || fieldName === 'avatar') {
         continue;
       }
       inputField.value = userInfo[fieldName];
