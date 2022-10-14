@@ -21,6 +21,8 @@ const passInputProps: InputProps = {
   placeholder: 'Введите пароль',
 };
 
+const authApi = new UserAuthController();
+
 async function onLogin() {
   const login = document.getElementById(loginInputProps.name).value;
   const password = document.getElementById(passInputProps.name).value;
@@ -28,7 +30,6 @@ async function onLogin() {
     console.log('Не указан логин или пароль');
     return;
   }
-  const authApi = new UserAuthController();
   const response = await authApi.login({ login, password });
   if (response.status !== 200) {
     console.log('Ошибка в логине или пароле');
@@ -65,5 +66,12 @@ export class LoginPage extends BaseBlock {
 
   render() {
     return this.compile(tpl, this.props);
+  }
+
+  async componentDidMount() {
+    const userInfo = await authApi.getInfo();
+    if (Object.keys(userInfo)) {
+      router.go('/messenger');
+    }
   }
 }
