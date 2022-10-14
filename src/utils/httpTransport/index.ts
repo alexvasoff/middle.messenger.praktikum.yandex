@@ -25,9 +25,13 @@ export class HTTPTransport {
     method: METHODS.GET,
   }, options.timeout);
 
-  post = (url, options = {}) => this.request(url, { ...options, headers: { 'Content-Type': 'application/json' }, method: METHODS.POST }, options.timeout);
+  post = (url, options = {}) => this.request(url, {
+    ...options, headers: { 'Content-Type': 'application/json' }, method: METHODS.POST, credentials: 'include',
+  }, options.timeout);
 
-  put = (url, options = {}) => this.request(url, { ...options, headers: { 'Content-Type': 'application/json' }, method: METHODS.PUT }, options.timeout);
+  put = (url, options = {}) => this.request(url, {
+    ...options, headers: { 'Content-Type': 'application/json' }, method: METHODS.PUT, credentials: 'include',
+  }, options.timeout);
 
   delete = (url, options = {}) => this.request(url, { ...options, method: METHODS.DELETE }, options.timeout);
 
