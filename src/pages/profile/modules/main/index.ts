@@ -47,6 +47,7 @@ const components = {
       click: async () => {
         const authApi = new UserAuthController();
         const response = await authApi.logout();
+        store.set('me', null);
         if (response.status === 200) {
           router.go('/');
         }
