@@ -1,9 +1,11 @@
 import tpl from './tpl.hbs';
 import './style.scss';
 import { BaseBlock } from '../../utils/baseBlock';
+import { Props } from "./types";
 
 export class Button extends BaseBlock {
-  constructor(props) {
+  constructor(props: Props) {
+    props.type ||= 'default';
     super('div', props);
   }
 
