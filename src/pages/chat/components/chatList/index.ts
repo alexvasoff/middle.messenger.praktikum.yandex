@@ -5,11 +5,11 @@ import { Button } from '../../../../components/button';
 import { Input } from '../../../../components/input';
 import { BaseBlock } from '../../../../utils/baseBlock';
 import { router } from '../../../../router';
-import { ChatController } from '../../../../utils/apiControllers/chat';
+import { ChatController } from '../../../../api/apiControllers/chat';
 
 const chatApi = new ChatController();
 
-class ChatList extends BaseBlock {
+export class ChatList extends BaseBlock {
   constructor(props) {
     super('div', props);
   }

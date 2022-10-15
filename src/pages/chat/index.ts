@@ -1,22 +1,22 @@
 import tpl from './tpl.hbs';
 import './style.scss';
 import { BaseBlock } from '../../utils/baseBlock';
-import { chatContent } from './components/chatContent';
-import { chatList } from './components/chatList';
-import { ChatController } from '../../utils/apiControllers/chat';
-import { UserAuthController } from '../../utils/apiControllers/userAuth';
+import { ChatContent, chatContent } from './components/chatContent';
+import { ChatList, chatList } from './components/chatList';
+import { ChatController } from '../../api/apiControllers/chat';
+import { UserAuthController } from '../../api/apiControllers/userAuth';
 
 const authApi = new UserAuthController();
 const chatApi = new ChatController();
 
 interface ChatPageProps {
-  chatContentComponent : unknown;
-  chatListComponent : unknown;
+  chatContent : ChatContent;
+  chatList : ChatList;
 }
 
 const pageProps: ChatPageProps = {
-  chatContentComponent: chatContent(),
-  chatListComponent: chatList(),
+  chatContent: chatContent(),
+  chatList: chatList(),
 };
 
 export class ChatPage extends BaseBlock {

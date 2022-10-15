@@ -5,7 +5,7 @@ import { Input } from '../../../../components/input';
 import { Button } from '../../../../components/button';
 import { BaseBlock } from '../../../../utils/baseBlock';
 
-class ChatContent extends BaseBlock {
+export class ChatContent extends BaseBlock {
   constructor(props) {
     super('div', props);
   }
