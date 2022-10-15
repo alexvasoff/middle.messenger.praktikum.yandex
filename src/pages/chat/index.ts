@@ -10,13 +10,13 @@ const authApi = new UserAuthController();
 const chatApi = new ChatController();
 
 interface ChatPageProps {
-  chatContent : unknown;
-  chatList : unknown;
+  chatContentComponent : unknown;
+  chatListComponent : unknown;
 }
 
 const pageProps: ChatPageProps = {
-  chatContent: chatContent(),
-  chatList: chatList(),
+  chatContentComponent: chatContent(),
+  chatListComponent: chatList(),
 };
 
 export class ChatPage extends BaseBlock {
