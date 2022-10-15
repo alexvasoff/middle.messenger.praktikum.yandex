@@ -7,6 +7,7 @@ import { Avatar } from '../../../../components/avatar';
 import { UserAuthController } from '../../../../utils/apiControllers/userAuth';
 import { store } from '../../../../utils/store';
 import { router } from '../../../../router';
+import { setFormData } from '../../../../utils/setFormData';
 
 const components = {
   avatar: new Avatar(),
@@ -78,14 +79,7 @@ export class ProfileMainPage extends BaseBlock {
     super('div', components);
     const authApi = new UserAuthController();
     authApi.getInfo().then(userInfo => {
-      const inputFields = document.getElementsByTagName('input');
-      for (const inputField of inputFields) {
-        const fieldName = inputField.name;
-        if (!userInfo[fieldName] || fieldName === 'avatar') {
-          continue;
-        }
-        inputField.value = userInfo[fieldName];
-      }
+      setFormData(userInfo);
     });
   }
 

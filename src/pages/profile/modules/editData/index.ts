@@ -9,6 +9,7 @@ import { router } from '../../../../router';
 import { UserAuthController } from '../../../../utils/apiControllers/userAuth';
 import { UserProfileController } from '../../../../utils/apiControllers/userProfile';
 import { getFormData } from '../../../../utils/getFormData';
+import { setFormData } from '../../../../utils/setFormData';
 
 const authApi = new UserAuthController();
 const profileApi = new UserProfileController();
@@ -50,7 +51,6 @@ const props: Props = {
 export class ProfileEditDataPage extends BaseBlock {
   constructor() {
     super('div', props);
-    // тут ожидается, что данные уже в кэше (если перешли с основной страницы настроек)
   }
 
   render() {
@@ -59,13 +59,6 @@ export class ProfileEditDataPage extends BaseBlock {
 
   async componentDidMount(oldProps) {
     const userInfo = await authApi.getInfo();
-    const inputFields = document.getElementsByTagName('input');
-    for (const inputField of inputFields) {
-      const fieldName = inputField.name;
-      if (!userInfo[fieldName] || fieldName === 'avatar') {
-        continue;
-      }
-      inputField.value = userInfo[fieldName];
-    }
+    setFormData(userInfo);
   }
 }
