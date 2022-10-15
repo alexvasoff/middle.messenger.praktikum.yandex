@@ -1,8 +1,12 @@
+import { Avatar } from '../../../../components/avatar';
+import { Input } from '../../../../components/input';
+import { Button } from '../../../../components/button';
+
 export interface Props {
-  avatar: unknown;
-  oldPassword: unknown;
-  newPassword: unknown;
-  newPasswordGuard: unknown;
-  savaChanges: unknown;
-  back: unknown;
+  avatar: Avatar;
+  oldPassword: Input;
+  newPassword: Input;
+  newPasswordGuard: Input;
+  savaChanges: Button;
+  back: Button;
 }
