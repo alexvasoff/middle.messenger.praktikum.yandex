@@ -7,7 +7,7 @@ import { Props as InputProps } from '../../components/input/types';
 import { Props as LoginPageProps } from './types';
 import { BaseBlock } from '../../utils/baseBlock';
 import { router } from '../../router';
-import { UserAuthController } from '../../utils/apiControllers/userAuth';
+import { UserAuthController } from '../../api/apiControllers/userAuth';
 
 const loginInputProps: InputProps = {
   name: 'login',

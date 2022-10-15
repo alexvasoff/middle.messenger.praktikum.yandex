@@ -6,8 +6,8 @@ import { Input } from '../../../../components/input';
 import { Button } from '../../../../components/button';
 import { Props } from './types';
 import { router } from '../../../../router';
-import { UserAuthController } from '../../../../utils/apiControllers/userAuth';
-import { UserProfileController } from '../../../../utils/apiControllers/userProfile';
+import { UserAuthController } from '../../../../api/apiControllers/userAuth';
+import { UserProfileController } from '../../../../api/apiControllers/userProfile';
 import { getFormData } from '../../../../utils/getFormData';
 import { setFormData } from '../../../../utils/setFormData';
 

@@ -1,6 +1,6 @@
-import { HTTPTransport } from '../httpTransport';
-import { apiPath } from './apiPath';
-import { store } from '../store';
+import { HTTPTransport } from '../../utils/httpTransport';
+import { apiPath } from '../apiPath';
+import { store } from '../../utils/store';
 import { router } from '../../router';
 
 interface loginData {

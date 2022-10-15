@@ -4,7 +4,7 @@ import { BaseBlock } from '../../../../utils/baseBlock';
 import { Button } from '../../../../components/button';
 import { Input } from '../../../../components/input';
 import { Avatar } from '../../../../components/avatar';
-import { UserAuthController } from '../../../../utils/apiControllers/userAuth';
+import { UserAuthController } from '../../../../api/apiControllers/userAuth';
 import { store } from '../../../../utils/store';
 import { router } from '../../../../router';
 import { setFormData } from '../../../../utils/setFormData';

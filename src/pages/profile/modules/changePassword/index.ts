@@ -6,7 +6,7 @@ import { Button } from '../../../../components/button';
 import { Input } from '../../../../components/input';
 import { BaseBlock } from '../../../../utils/baseBlock';
 import { Props } from './types';
-import { UserProfileController } from '../../../../utils/apiControllers/userProfile';
+import { UserProfileController } from '../../../../api/apiControllers/userProfile';
 import { getFormData } from '../../../../utils/getFormData';
 import { router } from '../../../../router';
 

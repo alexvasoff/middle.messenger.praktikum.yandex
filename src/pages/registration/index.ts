@@ -5,7 +5,7 @@ import { Input } from '../../components/input';
 import { BaseBlock } from '../../utils/baseBlock';
 import { Props as RegistrationProps } from './types';
 import { router } from '../../router';
-import { UserAuthController } from '../../utils/apiControllers/userAuth';
+import { UserAuthController } from '../../api/apiControllers/userAuth';
 import { getFormData } from '../../utils/getFormData';
 
 async function onRegister() {

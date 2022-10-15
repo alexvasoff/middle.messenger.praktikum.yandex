@@ -1,5 +1,5 @@
-import { HTTPTransport } from '../httpTransport';
-import { apiPath } from './apiPath';
+import { HTTPTransport } from '../../utils/httpTransport';
+import { apiPath } from '../apiPath';
 
 interface CreateChat {
   title: string;
