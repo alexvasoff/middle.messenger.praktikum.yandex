@@ -36,6 +36,9 @@ export class ChatPage extends BaseBlock {
     }
     const TOKEN_VALUE = response.response;
     const USER_ID = await authApi.getInfo();
+    if (!USER_ID) {
+      return;
+    }
     const CHAT_ID = chat.id;
 
     if (!(TOKEN_VALUE && USER_ID && CHAT_ID)) {

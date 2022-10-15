@@ -77,13 +77,18 @@ const components = {
 export class ProfileMainPage extends BaseBlock {
   constructor() {
     super('div', components);
-    const authApi = new UserAuthController();
-    authApi.getInfo().then(userInfo => {
-      setFormData(userInfo);
-    });
   }
 
   render() {
     return this.compile(tpl, this.props);
+  }
+
+  async componentDidMount() {
+    const authApi = new UserAuthController();
+    const userInfo = await authApi.getInfo();
+    if (!userInfo) {
+      return;
+    }
+    setFormData(userInfo);
   }
 }

@@ -76,8 +76,9 @@ export class LoginPage extends BaseBlock {
 
   async componentDidMount() {
     const userInfo = await authApi.getInfo();
-    if (Object.keys(userInfo)) {
-      router.go('/messenger');
+    if (!userInfo) {
+      return;
     }
+    router.go('/messenger');
   }
 }

@@ -59,6 +59,9 @@ export class ProfileEditDataPage extends BaseBlock {
 
   async componentDidMount(oldProps) {
     const userInfo = await authApi.getInfo();
+    if (!userInfo) {
+      return;
+    }
     setFormData(userInfo);
   }
 }
