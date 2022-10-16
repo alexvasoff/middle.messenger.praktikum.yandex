@@ -13,14 +13,7 @@ import { router } from '../../../../router';
 async function onChangePass() {
   const params = getFormData();
   const profileApi = new UserProfileController();
-  const response = await profileApi.changePassword(params);
-  if (response !== 200) {
-    console.log('Не удалось поменять пароль!');
-    console.log(response);
-    return;
-  }
-  console.log('Вы успешно изменили пароль!');
-  router.go('/settings');
+  await profileApi.changePassword(params);
 }
 
 const props: Props = {

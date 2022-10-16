@@ -1,11 +1,7 @@
-import { HTTPTransport } from '../../utils/httpTransport';
-import { apiPath } from '../apiPath';
 import { ChangePassword, EditData } from '../types';
 
 import { UserApi } from '../apiModules/userApi';
 import { router } from '../../router';
-
-const request = new HTTPTransport();
 
 const userApi = new UserApi();
 
@@ -19,14 +15,15 @@ export class UserProfileController {
     router.go('/messenger');
   }
 
-  public changePassword(data: ChangePassword) {
-    const options = {
-      data: JSON.stringify(data),
-    };
-    return request.put(apiPath.changePassword, options);
-  }
-
-  public changeAvatar(data) {
-    return request.put(apiPath.changeAvatar, { data });
+  public async changePassword(data: ChangePassword) {
+    const response = await userApi.updatePassword(data);
+    console.log(response);
+    if (response.status !== 200) {
+      const { reason } = JSON.parse(response.response);
+      alert(`Не удалось поменять пароль! ${reason}`);
+      return;
+    }
+    alert('Пароль успешно изменен');
+    router.go('/settings');
   }
 }
