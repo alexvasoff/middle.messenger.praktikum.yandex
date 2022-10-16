@@ -27,8 +27,8 @@ async function onLogin() {
   const login = document.getElementById(loginInputProps.name).value;
   const password = document.getElementById(passInputProps.name).value;
   if (!(login && password)) {
-    console.log('Не указан логин или пароль');
-    console.log('*Если все указано, то, пожалуйста, перезагрузите страницу');
+    alert('Не указан логин или пароль.\n '
+      + '*Если все указано, то, пожалуйста, перезагрузите страницу');
     return;
   }
   await authApi.login({ login, password });
