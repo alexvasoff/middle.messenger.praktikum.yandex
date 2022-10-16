@@ -25,10 +25,7 @@ async function addChat() {
   if (!chatName) {
     return;
   }
-  const response = await chatApi.createChat({ title: chatName });
-  if (response.status !== 200) {
-    console.log('Не удалось создать чат');
-  }
+  await chatApi.createChat({ title: chatName });
 }
 
 export function chatList() {

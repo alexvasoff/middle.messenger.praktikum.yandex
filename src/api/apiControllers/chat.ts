@@ -1,25 +1,35 @@
-import { HTTPTransport } from '../../utils/httpTransport';
-import { apiPath } from '../apiPath';
+import { CreateChat } from '../types';
+import { ChatApi } from '../apiModules/chatApi';
+import { ChatTokenApi } from '../apiModules/chatTokenApi';
 
-interface CreateChat {
-  title: string;
-}
-
-const request = new HTTPTransport();
+const chatApi = new ChatApi();
+const tokenApi = new ChatTokenApi();
 
 export class ChatController {
-  public getChats() {
-    return request.get(apiPath.getChats);
+  public async getChats() {
+    const response = await chatApi.request();
+    if (response.status !== 200) {
+      alert('Не удалось загрузить чаты');
+      return;
+    }
+    const chats = JSON.parse(response.response);
+    return chats;
   }
 
-  public createChat(data: CreateChat) {
-    const options = {
-      data: JSON.stringify(data),
-    };
-    return request.post(apiPath.createChat, options);
+  public async createChat(data: CreateChat) {
+    const response = await chatApi.create(data);
+    if (response.status !== 200) {
+      alert('Не удалось создать чат');
+    }
+    alert('Чат успешно создан!');
   }
 
-  public getChatToken(id: string) {
-    return request.post(apiPath.getChatToken + id);
+  public async getChatToken(id: string) {
+    const response = await tokenApi.create(id);
+    if (response.status !== 200) {
+      alert('Не удалось получить Токен');
+    }
+    const { token } = JSON.parse(response.response);
+    return token;
   }
 }

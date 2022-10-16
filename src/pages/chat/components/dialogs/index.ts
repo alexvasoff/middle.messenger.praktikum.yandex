@@ -10,12 +10,7 @@ const chatApi = new ChatController();
 const authApi = new UserAuthController();
 
 async function openChat(chat) {
-  const response = await chatApi.getChatToken(chat.id);
-  if (response.status !== 200) {
-    console.log(('Не удалось получить токен чата'));
-    return;
-  }
-  const TOKEN_VALUE = JSON.parse(response.response).token;
+  const TOKEN_VALUE = await chatApi.getChatToken(chat.id);
   const userIdResponse = await authApi.getInfo();
   if (!userIdResponse) {
     return;
@@ -76,12 +71,7 @@ export class Dialogs extends BaseBlock {
   }
 
   async componentDidMount() {
-    const response = await chatApi.getChats();
-    if (response.status !== 200) {
-      console.log('Не удалось загрузить чаты');
-      return;
-    }
-    const chats = JSON.parse(response.response);
+    const chats = await chatApi.getChats();
     this.props.dialogs = chats;
   }
 }

@@ -20,3 +20,7 @@ export interface ChangePassword {
   oldPassword: string;
   newPassword: string;
 }
+
+export interface CreateChat {
+  title: string;
+}
