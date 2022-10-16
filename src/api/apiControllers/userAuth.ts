@@ -4,11 +4,20 @@ import { store } from '../../utils/store';
 import { router } from '../../router';
 import { LoginData, SignUp } from '../types';
 
+import { LoginApi } from '../apiModules/loginApi';
+import { LogoutApi } from '../apiModules/logoutApi';
+
 const request = new HTTPTransport();
 
 export class UserAuthController {
-  public login(data: LoginData) {
-    return request.post(apiPath.login, { data });
+  public async login(data: LoginData) {
+    const loginApi = new LoginApi();
+    const response = await loginApi.create(data);
+    if (response.status !== 200) {
+      alert('Ошибка в логине или пароле');
+      return;
+    }
+    router.go('/messenger');
   }
 
   public signUp(data: SignUp) {
@@ -42,7 +51,12 @@ export class UserAuthController {
     });
   }
 
-  public logout() {
-    return request.post(apiPath.logout);
+  public async logout() {
+    const logoutApi = new LogoutApi();
+    const response = await logoutApi.request();
+    if (response.status === 200) {
+      store.set('me', null);
+      router.go('/');
+    }
   }
 }

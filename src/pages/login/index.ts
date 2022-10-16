@@ -31,12 +31,7 @@ async function onLogin() {
     console.log('*Если все указано, то, пожалуйста, перезагрузите страницу');
     return;
   }
-  const response = await authApi.login({ login, password });
-  if (response.status !== 200) {
-    console.log('Ошибка в логине или пароле');
-    return;
-  }
-  router.go('/messenger');
+  await authApi.login({ login, password });
 }
 
 const signButtonProps: ButtonProps = {
