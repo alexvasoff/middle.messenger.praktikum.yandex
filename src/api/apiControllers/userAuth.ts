@@ -42,7 +42,6 @@ export class UserAuthController {
         let userInfo = null;
         if (response instanceof XMLHttpRequest) {
           if (response.status !== 200) {
-            console.log('Что-то пошло не так');
             router.go('/');
             reject(response);
             return;

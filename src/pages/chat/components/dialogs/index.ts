@@ -16,7 +16,6 @@ async function openChat(chat) {
     return;
   }
   const TOKEN_VALUE = JSON.parse(response.response).token;
-  console.log(TOKEN_VALUE);
   const userIdResponse = await authApi.getInfo();
   if (!userIdResponse) {
     return;
@@ -25,8 +24,6 @@ async function openChat(chat) {
   const CHAT_ID = chat.id;
 
   if (!(TOKEN_VALUE && USER_ID && CHAT_ID)) {
-    console.log('Не все данные указаны');
-    console.log('TOKEN_VALUE, USER_ID, CHAT_ID:', TOKEN_VALUE, USER_ID, CHAT_ID);
     return;
   }
   const socket = new WebSocket(`${baseWSUrl}/${USER_ID}/${CHAT_ID}/${TOKEN_VALUE}`);

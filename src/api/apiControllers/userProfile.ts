@@ -17,7 +17,6 @@ export class UserProfileController {
 
   public async changePassword(data: ChangePassword) {
     const response = await userApi.updatePassword(data);
-    console.log(response);
     if (response.status !== 200) {
       const { reason } = JSON.parse(response.response);
       alert(`Не удалось поменять пароль! ${reason}`);
