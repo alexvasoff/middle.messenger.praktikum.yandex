@@ -5,7 +5,6 @@ import { Button } from '../../../../components/button';
 import { Input } from '../../../../components/input';
 import { Avatar } from '../../../../components/avatar';
 import { UserAuthController } from '../../../../api/apiControllers/userAuth';
-import { store } from '../../../../utils/store';
 import { router } from '../../../../router';
 import { setFormData } from '../../../../utils/setFormData';
 
@@ -63,8 +62,8 @@ const components = {
     type: 'danger-text',
     events: {
       click: async () => {
-        const authApi = new UserAuthController();
-        await authApi.logout();
+        const authController = new UserAuthController();
+        await authController.logout();
       },
     },
   }),
@@ -80,8 +79,8 @@ export class ProfileMainPage extends BaseBlock {
   }
 
   async componentDidMount() {
-    const authApi = new UserAuthController();
-    const userInfo = await authApi.getInfo();
+    const authController = new UserAuthController();
+    const userInfo = await authController.getInfo();
     if (!userInfo) {
       return;
     }

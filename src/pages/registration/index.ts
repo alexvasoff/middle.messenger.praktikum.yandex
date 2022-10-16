@@ -10,8 +10,8 @@ import { getFormData } from '../../utils/getFormData';
 
 async function onRegister() {
   const params = getFormData();
-  const authApi = new UserAuthController();
-  await authApi.signUp(params);
+  const authController = new UserAuthController();
+  await authController.signUp(params);
 }
 
 const registerEvents = {

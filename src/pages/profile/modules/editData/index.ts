@@ -11,8 +11,8 @@ import { UserProfileController } from '../../../../api/apiControllers/userProfil
 import { getFormData } from '../../../../utils/getFormData';
 import { setFormData } from '../../../../utils/setFormData';
 
-const authApi = new UserAuthController();
-const profileApi = new UserProfileController();
+const authController = new UserAuthController();
+const profileController = new UserProfileController();
 
 function goBack() {
   router.back();
@@ -20,7 +20,7 @@ function goBack() {
 
 async function editData() {
   const formData = getFormData();
-  await profileApi.editData(formData);
+  await profileController.editData(formData);
 }
 
 const props: Props = {
@@ -58,7 +58,7 @@ export class ProfileEditDataPage extends BaseBlock {
   }
 
   async componentDidMount(oldProps) {
-    const userInfo = await authApi.getInfo();
+    const userInfo = await authController.getInfo();
     if (!userInfo) {
       return;
     }

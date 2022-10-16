@@ -2,6 +2,7 @@ import { ChangePassword, EditData } from '../types';
 
 import { UserApi } from '../apiModules/userApi';
 import { router } from '../../router';
+import { store } from '../../utils/store';
 
 const userApi = new UserApi();
 
@@ -12,6 +13,8 @@ export class UserProfileController {
       alert('Не удалось изменить данные!');
       return;
     }
+    const updatedData = JSON.parse(response.response);
+    store.set('me', updatedData);
     router.go('/messenger');
   }
 

@@ -6,12 +6,12 @@ import { ChatController } from '../../../../api/apiControllers/chat';
 import { UserAuthController } from '../../../../api/apiControllers/userAuth';
 import { baseWSUrl } from '../../../../../config';
 
-const chatApi = new ChatController();
-const authApi = new UserAuthController();
+const chatController = new ChatController();
+const authController = new UserAuthController();
 
 async function openChat(chat) {
-  const TOKEN_VALUE = await chatApi.getChatToken(chat.id);
-  const userIdResponse = await authApi.getInfo();
+  const TOKEN_VALUE = await chatController.getChatToken(chat.id);
+  const userIdResponse = await authController.getInfo();
   if (!userIdResponse) {
     return;
   }
@@ -71,7 +71,7 @@ export class Dialogs extends BaseBlock {
   }
 
   async componentDidMount() {
-    const chats = await chatApi.getChats();
+    const chats = await chatController.getChats();
     this.props.dialogs = chats;
   }
 }

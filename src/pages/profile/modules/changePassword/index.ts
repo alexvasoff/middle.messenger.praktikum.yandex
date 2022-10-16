@@ -12,8 +12,8 @@ import { router } from '../../../../router';
 
 async function onChangePass() {
   const params = getFormData();
-  const profileApi = new UserProfileController();
-  await profileApi.changePassword(params);
+  const profileController = new UserProfileController();
+  await profileController.changePassword(params);
 }
 
 const props: Props = {

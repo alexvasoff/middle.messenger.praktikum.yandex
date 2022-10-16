@@ -8,7 +8,7 @@ import { router } from '../../../../router';
 import { ChatController } from '../../../../api/apiControllers/chat';
 import { Dialogs } from '../dialogs';
 
-const chatApi = new ChatController();
+const chatController = new ChatController();
 
 export class ChatList extends BaseBlock {
   constructor(props) {
@@ -25,7 +25,7 @@ async function addChat() {
   if (!chatName) {
     return;
   }
-  await chatApi.createChat({ title: chatName });
+  await chatController.createChat({ title: chatName });
 }
 
 export function chatList() {

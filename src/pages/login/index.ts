@@ -21,7 +21,7 @@ const passInputProps: InputProps = {
   placeholder: 'Введите пароль',
 };
 
-const authApi = new UserAuthController();
+const authController = new UserAuthController();
 
 async function onLogin() {
   const login = document.getElementById(loginInputProps.name).value;
@@ -31,7 +31,7 @@ async function onLogin() {
       + '*Если все указано, то, пожалуйста, перезагрузите страницу');
     return;
   }
-  await authApi.login({ login, password });
+  await authController.login({ login, password });
 }
 
 const signButtonProps: ButtonProps = {
@@ -70,7 +70,7 @@ export class LoginPage extends BaseBlock {
   }
 
   async componentDidMount() {
-    const userInfo = await authApi.getInfo();
+    const userInfo = await authController.getInfo();
     if (!userInfo) {
       return;
     }
