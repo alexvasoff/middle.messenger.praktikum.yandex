@@ -6,6 +6,7 @@ import { LoginData, SignUp } from '../types';
 
 import { LoginApi } from '../apiModules/loginApi';
 import { LogoutApi } from '../apiModules/logoutApi';
+import { SignUpApi } from '../apiModules/signUpApi';
 
 const request = new HTTPTransport();
 
@@ -20,8 +21,15 @@ export class UserAuthController {
     router.go('/messenger');
   }
 
-  public signUp(data: SignUp) {
-    return request.post(apiPath.signUp, { data });
+  public async signUp(data: SignUp) {
+    const signUpApi = new SignUpApi();
+    const response = await signUpApi.create(data);
+    if (response.status !== 200) {
+      const reason = JSON.parse(response.response).reason;
+      alert(`Не удалось создать пользователя, ${reason}`);
+      return;
+    }
+    router.go('/');
   }
 
   public getInfo() {

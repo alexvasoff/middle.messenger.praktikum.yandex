@@ -11,13 +11,7 @@ import { getFormData } from '../../utils/getFormData';
 async function onRegister() {
   const params = getFormData();
   const authApi = new UserAuthController();
-  const response = await authApi.signUp(params);
-  if (response.status !== 200) {
-    console.log('Не удалось создать пользователя');
-    console.log(response);
-    return;
-  }
-  router.go('/');
+  await authApi.signUp(params);
 }
 
 const registerEvents = {
