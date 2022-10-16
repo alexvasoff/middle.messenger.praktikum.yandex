@@ -1,3 +1,5 @@
+import { baseApiUrl } from '../../../config';
+
 const METHODS = {
   GET: 'GET',
   POST: 'POST',
@@ -36,7 +38,12 @@ export class HTTPTransport {
   delete = (url, options = {}) => this.request(url, { ...options, method: METHODS.DELETE }, options.timeout);
 
   request = (url, options = {}, timeout = 5000) => {
-    const { headers = {}, method, data } = options;
+    url = baseApiUrl + url;
+    let { headers = {}, method, data } = options;
+
+    if (typeof data !== 'string') {
+      data = JSON.stringify(data);
+    }
 
     return new Promise((resolve, reject) => {
       if (!method) {
