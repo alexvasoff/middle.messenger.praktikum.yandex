@@ -6,6 +6,7 @@ import { Input } from '../../../../components/input';
 import { BaseBlock } from '../../../../utils/baseBlock';
 import { router } from '../../../../router';
 import { ChatController } from '../../../../api/apiControllers/chat';
+import { Dialogs } from '../dialogs';
 
 const chatApi = new ChatController();
 
@@ -50,6 +51,7 @@ export function chatList() {
       },
     }),
     search: new Input({ name: 'search', placeholder: 'Поиск' }),
+    dialogs: new Dialogs(),
   };
   const chatListComponent = new ChatList(props);
   return chatListComponent;
