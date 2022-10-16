@@ -11,3 +11,12 @@ export interface SignUp {
   password: string;
   phone: string;
 }
+
+export interface EditData extends Omit<SignUp, 'password'>{
+  display_name: string;
+}
+
+export interface ChangePassword {
+  oldPassword: string;
+  newPassword: string;
+}

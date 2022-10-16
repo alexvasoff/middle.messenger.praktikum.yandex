@@ -2,36 +2,17 @@ import { HTTPTransport } from '../../utils/httpTransport';
 import { apiPath } from '../apiPath';
 import { store } from '../../utils/store';
 import { router } from '../../router';
-
-interface loginData {
-  login: string;
-  password: string;
-}
-
-interface signUp {
-  first_name: string;
-  second_name: string;
-  login: string;
-  email: string;
-  password: string;
-  phone: string;
-}
+import { LoginData, SignUp } from '../types';
 
 const request = new HTTPTransport();
 
 export class UserAuthController {
-  public login(data: loginData) {
-    const options = {
-      data: JSON.stringify(data),
-    };
-    return request.post(apiPath.login, options);
+  public login(data: LoginData) {
+    return request.post(apiPath.login, { data });
   }
 
-  public signUp(data: signUp) {
-    const options = {
-      data: JSON.stringify(data),
-    };
-    return request.post(apiPath.signUp, options);
+  public signUp(data: SignUp) {
+    return request.post(apiPath.signUp, { data });
   }
 
   public getInfo() {

@@ -1,19 +1,6 @@
 import { HTTPTransport } from '../../utils/httpTransport';
 import { apiPath } from '../apiPath';
-
-interface EditData {
-  first_name: string;
-  second_name: string;
-  login: string;
-  email: string;
-  password: string;
-  phone: string;
-}
-
-interface ChangePassword {
-  oldPassword: string;
-  newPassword: string;
-}
+import { ChangePassword, EditData } from '../types';
 
 const request = new HTTPTransport();
 
