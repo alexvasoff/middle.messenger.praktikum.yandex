@@ -2,14 +2,21 @@ import { HTTPTransport } from '../../utils/httpTransport';
 import { apiPath } from '../apiPath';
 import { ChangePassword, EditData } from '../types';
 
+import { UserApi } from '../apiModules/userApi';
+import { router } from '../../router';
+
 const request = new HTTPTransport();
 
+const userApi = new UserApi();
+
 export class UserProfileController {
-  public editData(data: EditData) {
-    const options = {
-      data: JSON.stringify(data),
-    };
-    return request.put(apiPath.editData, options);
+  public async editData(data: EditData) {
+    const response = await userApi.updateData(data);
+    if (response.status !== 200) {
+      alert('Не удалось изменить данные!');
+      return;
+    }
+    router.go('/messenger');
   }
 
   public changePassword(data: ChangePassword) {

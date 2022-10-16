@@ -18,9 +18,9 @@ function goBack() {
   router.back();
 }
 
-function editData() {
+async function editData() {
   const formData = getFormData();
-  profileApi.editData(formData);
+  await profileApi.editData(formData);
 }
 
 const props: Props = {
