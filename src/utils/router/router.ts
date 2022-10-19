@@ -1,45 +1,58 @@
-import { Route } from './route';
+import { BlockConstructor, Route } from './route';
 
 export class Router {
-  constructor(rootQuery) {
+  private static __instance: Router;
+
+  private routes: Route[] = [];
+
+  private currentRoute: Route | null = null;
+
+  private history = window.history;
+
+  constructor(private readonly rootQuery: string) {
     if (Router.__instance) {
       return Router.__instance;
     }
 
-    this.routes = [];
     this.history = window.history;
-    this._currentRoute = null;
-    this._rootQuery = rootQuery;
+    this.currentRoute = null;
 
     Router.__instance = this;
   }
 
-  use(pathname, block) {
-    const route = new Route(pathname, block, { rootQuery: this._rootQuery });
+  use(pathname: string, block: BlockConstructor) {
+    const route = new Route(pathname, block, { rootQuery: this.rootQuery });
     this.routes.push(route);
     return this;
   }
 
-  start() {
+  public start() {
     // Реагируем на изменения в адресной строке и вызываем перерисовку
-    window.onpopstate = event => {
-      this._onRoute(event.currentTarget.location.pathname);
+    window.onpopstate = (event: PopStateEvent) => {
+      const target = event.currentTarget as Window;
+
+      this._onRoute(target.location.pathname);
     };
 
     this._onRoute(window.location.pathname);
   }
 
-  _onRoute(pathname) {
+  _onRoute(pathname: string) {
     const route = this.getRoute(pathname);
-    if (this._currentRoute) {
-      this._currentRoute.leave();
+
+    if (!route) {
+      return;
     }
 
-    this._currentRoute = route;
-    route.render(route, pathname);
+    if (this.currentRoute) {
+      this.currentRoute.leave();
+    }
+
+    this.currentRoute = route;
+    route.render();
   }
 
-  go(pathname) {
+  go(pathname: string) {
     this.history.pushState({}, '', pathname);
     this._onRoute(pathname);
   }
@@ -52,7 +65,7 @@ export class Router {
     this.history.forward();
   }
 
-  getRoute(pathname) {
+  getRoute(pathname: string) {
     return this.routes.find(route => route.match(pathname));
   }
 }
