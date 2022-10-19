@@ -3,7 +3,7 @@ import { EventBus } from '../eventBus';
 
 export type BaseProps = {
   eventsTo? : string;
-  events? : Record<string, Function>;
+  events? : Record<string, () => unknown>;
   [key: string | number]: any;
 }
 
@@ -18,15 +18,15 @@ class BaseBlock {
 
   private _id = makeUUID();
 
-  private _element;
+  private _element: HTMLElement | null = null;
 
-  private _meta = {};
+  private _meta: Record<string | number, unknown> = {};
 
   public props: BaseProps = {};
 
-  public children = {};
+  public children: Record<string, BaseBlock> = {};
 
-  public eventBus;
+  public eventBus: () => EventBus;
 
   constructor(tagName = 'div', propsAndChildren: BaseProps = {}) {
     const eventBus = new EventBus();
@@ -47,8 +47,8 @@ class BaseBlock {
     eventBus.emit(BaseBlock.EVENTS.INIT);
   }
 
-  _getChildren(propsAndChildren) {
-    const children = {};
+  _getChildren(propsAndChildren: Record<string | symbol, unknown>) {
+    const children: Record<string | symbol, BaseBlock> = {};
     const props: BaseProps = {};
     Object.entries(propsAndChildren).forEach(([key, value]) => {
       if (value instanceof BaseBlock) {
@@ -61,12 +61,14 @@ class BaseBlock {
     return { children, props };
   }
 
-  compile(template, props) {
+  compile(template: Function, props: Record<string, unknown>) {
     const propsAndStubs = { ...props };
     Object.entries(this.children).forEach(([key, child]) => {
-      propsAndStubs[key] = `<div data-id="${child._id}"></div>`;
+      if (child instanceof BaseBlock) {
+        propsAndStubs[key] = `<div data-id="${child._id}"></div>`;
+      }
     });
-    const fragment = this._createDocumentElement('template');
+    const fragment: HTMLTemplateElement = this._createDocumentElement('template') as unknown as HTMLTemplateElement;
     fragment.innerHTML = template(propsAndStubs);
     Object.values(this.children).forEach(child => {
       const stub = fragment.content.querySelector(`[data-id="${child._id}"]`);
@@ -75,7 +77,7 @@ class BaseBlock {
     return fragment.content;
   }
 
-  _registerEvents(eventBus) {
+  _registerEvents(eventBus: EventBus) {
     eventBus.on(BaseBlock.EVENTS.INIT, this.init.bind(this));
     eventBus.on(BaseBlock.EVENTS.FLOW_CMD, this._componentDidMount.bind(this));
     eventBus.on(BaseBlock.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
@@ -87,7 +89,7 @@ class BaseBlock {
     this.eventBus().emit(BaseBlock.EVENTS.FLOW_RENDER);
   }
 
-  setProps = nextProps => {
+  setProps = (nextProps: unknown) => {
     if (!nextProps) {
       return;
     }
@@ -97,10 +99,11 @@ class BaseBlock {
 
   _createResources() {
     const { tagName } = this._meta;
-    this._element = this._createDocumentElement(tagName);
+    const tag = tagName as string;
+    this._element = this._createDocumentElement(tag);
   }
 
-  _createDocumentElement(tagName) {
+  _createDocumentElement(tagName: string) {
     const element = document.createElement(tagName);
     element.setAttribute('data-id', this._id);
     return element;
@@ -118,17 +121,18 @@ class BaseBlock {
     this.eventBus().emit(BaseBlock.EVENTS.FLOW_RENDER);
   }
 
-  componentDidMount(oldProps) { }
+  componentDidMount() { }
 
-  _componentDidUpdate(oldProps, newProps) {
-    const response = this.componentDidUpdate(oldProps, newProps);
+  _componentDidUpdate() {
+    const response = this.componentDidUpdate();
     if (!response) {
       return false;
     }
     this.eventBus().emit(BaseBlock.EVENTS.FLOW_RENDER);
+    return true;
   }
 
-  componentDidUpdate(oldProps, newProps) {
+  componentDidUpdate() {
     return true;
   }
 
@@ -140,7 +144,7 @@ class BaseBlock {
     if (!directElementName) {
       const directElement = this._element;
       Object.keys(events).forEach(eventName => {
-        directElement.addEventListener(eventName, events[eventName]);
+        directElement?.addEventListener(eventName, events[eventName]);
       });
     }
     const directElements = this._element.querySelectorAll(directElementName);
@@ -161,7 +165,8 @@ class BaseBlock {
   }
 
   _render() {
-    const block = this.render();
+    const _block = this.render();
+    const block = _block as unknown as Node;
     this._removeEvents();
     if (typeof block !== 'string') {
       this._element.innerHTML = '';
@@ -176,14 +181,14 @@ class BaseBlock {
     // Переопределяется пользователем. => Разметку
   }
 
-  _makePropsProxy(props) {
+  _makePropsProxy(props: Record<string, unknown>) {
     const self = this;
     return new Proxy(props, {
-      get(target: {}, p: string | symbol): any {
+      get(target: Record<string | symbol, unknown>, p: string | symbol): any {
         const value = target[p];
         return typeof value === 'function' ? value.bind(target) : value;
       },
-      set(target: {}, p: string | symbol, value: any): boolean {
+      set(target: Record<string | symbol, unknown>, p: string | symbol, value: any): boolean {
         const oldProps = JSON.parse(JSON.stringify(target || {}));
         target[p] = value;
         self.eventBus().emit(BaseBlock.EVENTS.FLOW_CDU, oldProps, target);

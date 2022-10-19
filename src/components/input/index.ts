@@ -1,11 +1,8 @@
-import Handlebars from 'handlebars';
 import tpl from './tpl.hbs';
 import './style.scss';
 import { BaseBlock } from '../../utils/baseBlock';
 import { Props as InputProps } from './types';
 import { validate } from '../../utils/validators';
-
-Handlebars.registerPartial('input', tpl);
 
 function declareInputEvents(props: InputProps) {
   const validateHandler = () => {
@@ -35,14 +32,4 @@ export class Input extends BaseBlock {
   render() {
     return tpl(this.props);
   }
-}
-
-export function input(name, label, placeholder, style = {}) {
-  style.width = style.width || '280px'; // длина инпута
-  style.readOnly = style.readOnly || false;
-  const readonly = style.readOnly ? 'readonly' : '';
-  const className = readonly ? 'input__field_readonly' : '';
-  return tpl({
-    name, label, placeholder, readonly, style, className,
-  });
 }
