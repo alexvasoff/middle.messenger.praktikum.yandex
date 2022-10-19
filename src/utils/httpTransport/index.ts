@@ -7,9 +7,19 @@ const METHODS = {
   DELETE: 'DELETE',
 };
 
+type Options = {
+  data?: any;
+  timeout?: number | undefined;
+  headers?: any;
+  method?: string | undefined;
+  credentials?: string;
+};
+
+type Obj = Record<string | number | symbol, unknown>
+
 // Самая простая версия. Реализовать штучку со всеми проверками им предстоит в конце спринта
 // Необязательный метод
-function queryStringify(data) {
+function queryStringify(data: Obj) {
   if (typeof data !== 'object') {
     throw new Error('Data must be object');
   }
@@ -22,22 +32,22 @@ function queryStringify(data) {
 }
 
 export class HTTPTransport {
-  get = (url, options = {}) => this.request(options.data ? `${url}${queryStringify(options.data)}` : url, {
+  get = (url:string, options: Options = {}) => this.request(options.data ? `${url}${queryStringify(options.data)}` : url, {
     ...options,
     method: METHODS.GET,
   }, options.timeout);
 
-  post = (url, options = {}) => this.request(url, {
+  post = (url: string, options: Options = {}) => this.request(url, {
     ...options, headers: { 'Content-Type': 'application/json' }, method: METHODS.POST, credentials: 'include',
   }, options.timeout);
 
-  put = (url, options = {}) => this.request(url, {
+  put = (url: string, options: Options = {}) => this.request(url, {
     ...options, headers: { 'Content-Type': 'application/json' }, method: METHODS.PUT, credentials: 'include',
   }, options.timeout);
 
-  delete = (url, options = {}) => this.request(url, { ...options, method: METHODS.DELETE }, options.timeout);
+  delete = (url: string, options: Options = {}) => this.request(url, { ...options, method: METHODS.DELETE }, options.timeout);
 
-  request = (url, options = {}, timeout = 5000) => {
+  request = (url: string, options: Options = {}, timeout = 5000) => {
     url = baseApiUrl + url;
     let { headers = {}, method, data } = options;
 
