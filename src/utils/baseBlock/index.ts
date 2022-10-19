@@ -106,7 +106,7 @@ class BaseBlock {
     return element;
   }
 
-  dispatchComponentDidMount() {
+  public dispatchComponentDidMount() {
     this.eventBus().emit(BaseBlock.EVENTS.FLOW_CMD);
   }
 
@@ -207,7 +207,7 @@ class BaseBlock {
     this.getContent().style.display = 'block';
   }
 
-  hide() {
+  public hide() {
     this.getContent().style.display = 'none';
   }
 }
