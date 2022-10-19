@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import { Input } from './index';
 
-describe.only('Input', () => {
+describe('Input', () => {
   const inputName = 'phone';
   const inputLabel = 'testLabel';
   const inputPlaceholder = 'text';
