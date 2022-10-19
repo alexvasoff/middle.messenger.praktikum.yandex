@@ -9,9 +9,10 @@ import { Props } from './types';
 import { UserProfileController } from '../../../../api/apiControllers/userProfile';
 import { getFormData } from '../../../../utils/getFormData';
 import { router } from '../../../../router';
+import { ChangePassword } from '../../../../api/types';
 
 async function onChangePass() {
-  const params = getFormData();
+  const params = getFormData() as unknown as ChangePassword;
   const profileController = new UserProfileController();
   await profileController.changePassword(params);
 }

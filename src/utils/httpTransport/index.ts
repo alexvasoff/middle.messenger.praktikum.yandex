@@ -47,7 +47,7 @@ export class HTTPTransport {
 
   delete = (url: string, options: Options = {}) => this.request(url, { ...options, method: METHODS.DELETE }, options.timeout);
 
-  request = (url: string, options: Options = {}, timeout = 5000) => {
+  request = (url: string, options: Options = {}, timeout = 5000): Promise<XMLHttpRequest> => {
     url = baseApiUrl + url;
     let { headers = {}, method, data } = options;
 

@@ -4,9 +4,10 @@ import './style.scss';
 import { Input } from '../../../../components/input';
 import { Button } from '../../../../components/button';
 import { BaseBlock } from '../../../../utils/baseBlock';
+import { Props } from './types';
 
 export class ChatContent extends BaseBlock {
-  constructor(props) {
+  constructor(props: Props) {
     super('div', props);
   }
 

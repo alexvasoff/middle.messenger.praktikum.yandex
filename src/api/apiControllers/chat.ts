@@ -24,7 +24,7 @@ export class ChatController {
     alert('Чат успешно создан!');
   }
 
-  public async getChatToken(id: string) {
+  public async getChatToken(id: string | number) {
     const response = await tokenApi.create(id);
     if (response.status !== 200) {
       alert('Не удалось получить Токен');

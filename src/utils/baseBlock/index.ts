@@ -3,7 +3,7 @@ import { EventBus } from '../eventBus';
 
 export type BaseProps = {
   eventsTo? : string;
-  events? : Record<string, () => unknown>;
+  events? : Record<string, (event?: Event | ProgressEvent) => unknown>;
   [key: string | number]: any;
 }
 
@@ -144,14 +144,14 @@ class BaseBlock {
     if (!directElementName) {
       const directElement = this._element;
       Object.keys(events).forEach(eventName => {
-        directElement?.addEventListener(eventName, events[eventName]);
+        <unknown>directElement?.addEventListener(eventName, events[eventName]);
       });
     }
     const directElements = this._element.querySelectorAll(directElementName);
     if (!directElements) {
       return;
     }
-    Object.keys(events).forEach(eventName => {
+    Object.keys(events).forEach((eventName: string) => {
       directElements.forEach(el => el.addEventListener(eventName, events[eventName]));
     });
   }

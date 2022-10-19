@@ -29,17 +29,17 @@ export class UserAuthController {
     router.go('/');
   }
 
-  public getInfo() {
+  public getInfo(): Promise<Record<string, unknown>> {
     const cache = store.getState().me;
     if (cache && Object.keys(cache)) {
       return new Promise(resolve => {
-        resolve(cache);
+        resolve(cache as Record<string, unknown>);
       });
     }
     return new Promise((resolve, reject) => {
       const userApi = new UserApi();
       userApi.request().then(response => {
-        let userInfo = null;
+        let userInfo = {};
         if (response instanceof XMLHttpRequest) {
           if (response.status !== 200) {
             router.go('/');

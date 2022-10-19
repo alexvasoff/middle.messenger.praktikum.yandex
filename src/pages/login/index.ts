@@ -24,8 +24,8 @@ const passInputProps: InputProps = {
 const authController = new UserAuthController();
 
 async function onLogin() {
-  const login = document.getElementById(loginInputProps.name).value;
-  const password = document.getElementById(passInputProps.name).value;
+  const login = (<HTMLInputElement>document.getElementById(loginInputProps.name)).value;
+  const password = (<HTMLInputElement>document.getElementById(passInputProps.name)).value;
   if (!(login && password)) {
     alert('Не указан логин или пароль.\n '
       + '*Если все указано, то, пожалуйста, перезагрузите страницу');

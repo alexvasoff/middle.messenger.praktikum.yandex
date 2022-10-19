@@ -1,7 +1,7 @@
 import tpl from './tpl.hbs';
 import './style.scss';
 import { BaseBlock } from '../../../../utils/baseBlock';
-import { Dialog } from './types';
+import { Dialog, Dialogs as DialogsProps } from './types';
 import { ChatController } from '../../../../api/apiControllers/chat';
 import { UserAuthController } from '../../../../api/apiControllers/userAuth';
 import { baseWSUrl } from '../../../../../config';
@@ -9,7 +9,7 @@ import { baseWSUrl } from '../../../../../config';
 const chatController = new ChatController();
 const authController = new UserAuthController();
 
-async function openChat(chat) {
+async function openChat(chat: Dialog) {
   const TOKEN_VALUE = await chatController.getChatToken(chat.id);
   const userIdResponse = await authController.getInfo();
   if (!userIdResponse) {
@@ -46,18 +46,19 @@ async function openChat(chat) {
   });
 
   socket.addEventListener('error', event => {
-    console.log('Ошибка', event.message);
+    console.log('Ошибка', (<Error><unknown>event).message);
   });
 }
 
 export class Dialogs extends BaseBlock {
   constructor() {
-    const props : { dialogs: Dialog[], events: Record<string, Function> } = {
+    const props : DialogsProps = {
       dialogs: [],
       events: {
         click: async (event) => {
-          const selectedChatId = event.target.dataset.chatId;
-          const chat = this.props.dialogs.find(chat => chat.id == selectedChatId);
+          const chatElement = event.target as HTMLElement;
+          const selectedChatId = chatElement.dataset.chatId as string;
+          const chat = this.props.dialogs.find((dialog: Dialog) => +dialog.id === +selectedChatId);
           await openChat(chat);
         },
       },
@@ -75,13 +76,3 @@ export class Dialogs extends BaseBlock {
     this.props.dialogs = chats;
   }
 }
-
-/*
-* Данный компонент работает со списком чатов, получаемый (!первоначально!) из API
-* Как лучше получать список чатов? Через пропс для компонента или делать это внутри него?
-* Первый вариант кажется правильным, но местами избыточным. Второй добавляет магию внутри компонента.
-* Плюс нельзя будет напрямую управлять отображением компонента, например, меняя набор объектов в пропсах.
-* Но можно управлять логикой изменения через store, т.ч., похоже, что нет какого-то верного решения?
-* Пока писал вопрос, осознал, что это +- тоже самое, что и во Vue мы можем управлять как пропсами, так и самим объектом через $ref
-* Больше зависит от архитектуры проекта и выбранными решениями внутри команды, верно?
-* */

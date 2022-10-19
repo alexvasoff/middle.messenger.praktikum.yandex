@@ -1,5 +1,7 @@
 export class BaseAPI {
-  create() {}
+  create(data?: unknown) {
+    console.log(data);
+  }
 
   request() {}
 
