@@ -1,3 +1,5 @@
+import { baseApiUrl } from '../../../config';
+
 const METHODS = {
   GET: 'GET',
   POST: 'POST',
@@ -13,10 +15,10 @@ function queryStringify(data) {
   }
 
   // Здесь достаточно и [object Object] для объекта
-  return '?' + Object
+  return `?${Object
     .entries(data)
     .map(([key, value]) => `${key}=${value}`)
-    .join('&');
+    .join('&')}`;
 }
 
 export class HTTPTransport {
@@ -25,14 +27,23 @@ export class HTTPTransport {
     method: METHODS.GET,
   }, options.timeout);
 
-  post = (url, options = {}) => this.request(url, { ...options, method: METHODS.POST }, options.timeout);
+  post = (url, options = {}) => this.request(url, {
+    ...options, headers: { 'Content-Type': 'application/json' }, method: METHODS.POST, credentials: 'include',
+  }, options.timeout);
 
-  put = (url, options = {}) => this.request(url, { ...options, method: METHODS.PUT }, options.timeout);
+  put = (url, options = {}) => this.request(url, {
+    ...options, headers: { 'Content-Type': 'application/json' }, method: METHODS.PUT, credentials: 'include',
+  }, options.timeout);
 
   delete = (url, options = {}) => this.request(url, { ...options, method: METHODS.DELETE }, options.timeout);
 
   request = (url, options = {}, timeout = 5000) => {
-    const { headers = {}, method, data } = options;
+    url = baseApiUrl + url;
+    let { headers = {}, method, data } = options;
+
+    if (typeof data !== 'string') {
+      data = JSON.stringify(data);
+    }
 
     return new Promise((resolve, reject) => {
       if (!method) {
@@ -63,6 +74,8 @@ export class HTTPTransport {
 
       xhr.timeout = timeout;
       xhr.ontimeout = reject;
+
+      xhr.withCredentials = true;
 
       if (isGet || !data) {
         xhr.send();

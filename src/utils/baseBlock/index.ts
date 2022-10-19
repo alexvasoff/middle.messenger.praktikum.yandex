@@ -63,7 +63,6 @@ class BaseBlock {
 
   compile(template, props) {
     const propsAndStubs = { ...props };
-    console.log(propsAndStubs);
     Object.entries(this.children).forEach(([key, child]) => {
       propsAndStubs[key] = `<div data-id="${child._id}"></div>`;
     });
@@ -137,12 +136,19 @@ class BaseBlock {
     const { events = {} } = this.props;
 
     const directElementName = this.props.eventsTo;
-    const directElement = directElementName
-      ? this._element.querySelector(directElementName)
-      : this._element;
-
+    // Не указан eventsTo (target)
+    if (!directElementName) {
+      const directElement = this._element;
+      Object.keys(events).forEach(eventName => {
+        directElement.addEventListener(eventName, events[eventName]);
+      });
+    }
+    const directElements = this._element.querySelectorAll(directElementName);
+    if (!directElements) {
+      return;
+    }
     Object.keys(events).forEach(eventName => {
-      directElement.addEventListener(eventName, events[eventName]);
+      directElements.forEach(el => el.addEventListener(eventName, events[eventName]));
     });
   }
 

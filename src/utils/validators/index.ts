@@ -35,7 +35,7 @@ export const regExp = {
 
 export function validate(fieldName: InputFieldName, value: string) : boolean {
   if (!(fieldName in regExp)) {
-    throw new Error('Указан несуществующий fieldName');
+    throw new Error(`Не предусмотрена валидация для fieldName: ${fieldName}`);
   }
   return regExp[fieldName].test(value);
 }

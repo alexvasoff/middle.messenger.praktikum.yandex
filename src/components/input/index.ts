@@ -13,13 +13,6 @@ function declareInputEvents(props: InputProps) {
     const inputElement = document.getElementById(fieldName) as HTMLInputElement;
     const inputText = inputElement.value;
     const isValid = validate(fieldName, inputText);
-
-    if (!isValid) {
-      console.log(`Поле ${props.label} заполнено не по формату!`);
-    } else {
-      console.log(`Поле ${props.label} заполнено правильно!`);
-    }
-
     return isValid;
   };
 

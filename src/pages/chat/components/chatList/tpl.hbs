@@ -2,12 +2,14 @@
     <div class="chat-list__head">
         <div class="actions">
             <div class="actions__avatar"></div>
-            <a href="settings" class="router">{{{ settings }}}</a>
-            <div class="actions__create-chat">Создать чат</div>
+            <span class="router">{{{ settings }}}</span>
+            <div class="actions__create-chat">{{{ createChat }}}</div>
         </div>
         <div class="search">{{{ search }}}</div>
     </div>
     <div class="chat-list__main">
-        <div class="dialogs"></div>
+        <div class="dialogs">
+          {{{ dialogs }}}
+        </div>
     </div>
 </div>
