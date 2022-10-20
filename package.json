@@ -7,8 +7,6 @@
   },
   "scripts": {
     "start": "node ./server.js",
-    "dev": "parcel ./src/index.html",
-    "build-parcel": "parcel build ./src/index.html",
     "build": "webpack --mode=production --node-env=production",
     "test": "mocha --require ts-node/register --require ./mochaSetup.js './src/**/*.test.ts'",
     "build:dev": "webpack --mode=development",
@@ -27,7 +25,6 @@
   "author": "Aleksey Vasilev <alexvasoff@yandex.ru>",
   "license": "MIT",
   "devDependencies": {
-    "@parcel/transformer-sass": "2.6.2",
     "@types/chai": "^4.3.3",
     "@types/jsdom": "^20.0.0",
     "@types/jsdom-global": "^3.0.4",
@@ -56,9 +53,6 @@
     "jsdom": "^20.0.1",
     "jsdom-global": "^3.0.2",
     "mocha": "^10.1.0",
-    "parcel": "2.6.2",
-    "parcel-reporter-static-files-copy": "1.3.4",
-    "parcel-transformer-hbs": "1.0.4",
     "path-browserify": "^1.0.1",
     "process": "^0.11.10",
     "proxyquire": "^2.1.3",
