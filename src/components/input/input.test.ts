@@ -14,7 +14,6 @@ describe('Input', () => {
     const input = new Input({ name: inputName, label: inputLabel, placeholder: inputPlaceholder });
     const { element } = input;
 
-    // expect(element).to.be.instanceof(window.HTMLDivElement);
-    expect(element).to.be.eq(1);
+    expect(element).to.be.instanceof(window.HTMLDivElement);
   });
 });
