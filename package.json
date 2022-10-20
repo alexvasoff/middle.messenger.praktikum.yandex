@@ -22,17 +22,6 @@
       "distDir": "dist"
     }
   },
-  "pre-commit": {
-    "run": [
-      "test"
-    ],
-    "silent": false
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run test"
-    }
-  },
   "repository": "git@github.com:alexvasoff/middle.messenger.praktikum.yandex.git",
   "author": "Aleksey Vasilev <alexvasoff@yandex.ru>",
   "license": "MIT",
