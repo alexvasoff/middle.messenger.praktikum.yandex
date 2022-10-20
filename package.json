@@ -23,7 +23,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn test"
+      "pre-commit": "npm run test"
     }
   },
   "repository": "git@github.com:alexvasoff/middle.messenger.praktikum.yandex.git",
