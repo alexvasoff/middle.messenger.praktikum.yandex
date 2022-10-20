@@ -17,7 +17,13 @@
       "ESNext",
       "DOM.Iterable",
       "DOM"
-    ]
+    ],
+    "baseUrl": "src",
+    "paths": {
+      "@/*": [
+        "*"
+      ]
+    }
   },
   "include": [
     "src/typings"
