@@ -21,6 +21,11 @@
       "distDir": "dist"
     }
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn test"
+    }
+  },
   "repository": "git@github.com:alexvasoff/middle.messenger.praktikum.yandex.git",
   "author": "Aleksey Vasilev <alexvasoff@yandex.ru>",
   "license": "MIT",
@@ -50,6 +55,7 @@
     "express": "4.18.1",
     "handlebars-loader": "^1.7.2",
     "html-webpack-plugin": "^5.5.0",
+    "husky": "^8.0.1",
     "jsdom": "^20.0.1",
     "jsdom-global": "^3.0.2",
     "mocha": "^10.1.0",
