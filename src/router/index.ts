@@ -4,8 +4,6 @@ import { ChatPage } from '../pages/chat';
 import { ProfileMainPage } from '../pages/profile/modules/main';
 import { ProfileEditDataPage } from '../pages/profile/modules/editData';
 import { ProfileChangePasswordPage } from '../pages/profile/modules/changePassword';
-// import notFound from '../pages/notFound';
-// import serverError from '../pages/serverError';
 import { Router } from '../utils/router/router';
 
 const routesMap = {
@@ -15,8 +13,6 @@ const routesMap = {
   '/settings': ProfileMainPage,
   '/changeData': ProfileEditDataPage,
   '/changePassword': ProfileChangePasswordPage,
-  // '/notFound': notFound,
-  // '/serverError': serverError,
 };
 
 const router = new Router('#root');
