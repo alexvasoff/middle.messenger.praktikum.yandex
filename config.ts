@@ -1,6 +1,6 @@
 const baseUrl = 'ya-praktikum.tech';
 const baseApiVersion = '/api/v2';
 const baseApiUrl = `https://${baseUrl}${baseApiVersion}`;
-const baseWSUrl = `wss://${baseUrl}/ws`;
+const baseWSUrl = `wss://${baseUrl}/ws/chats`;
 
 export { baseApiUrl, baseWSUrl };
