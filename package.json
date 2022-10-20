@@ -21,6 +21,12 @@
       "distDir": "dist"
     }
   },
+  "pre-commit": {
+    "run": [
+      "test"
+    ],
+    "silent": false
+  },
   "husky": {
     "hooks": {
       "pre-commit": "npm run test"
