@@ -68,7 +68,7 @@ class BaseBlock {
         propsAndStubs[key] = `<div data-id="${child._id}"></div>`;
       }
     });
-    const fragment: HTMLTemplateElement = this._createDocumentElement('template') as unknown as HTMLTemplateElement;
+    const fragment = this._createDocumentElement('template') as unknown as HTMLTemplateElement;
     fragment.innerHTML = template(propsAndStubs);
     Object.values(this.children).forEach(child => {
       const stub = fragment.content.querySelector(`[data-id="${child._id}"]`);
