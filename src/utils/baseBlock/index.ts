@@ -47,7 +47,7 @@ class BaseBlock {
     eventBus.emit(BaseBlock.EVENTS.INIT);
   }
 
-  _getChildren(propsAndChildren: Record<string | symbol, unknown>) {
+  private _getChildren(propsAndChildren: Record<string | symbol, unknown>) {
     const children: Record<string | symbol, BaseBlock> = {};
     const props: BaseProps = {};
     Object.entries(propsAndChildren).forEach(([key, value]) => {
@@ -77,7 +77,7 @@ class BaseBlock {
     return fragment.content;
   }
 
-  _registerEvents(eventBus: EventBus) {
+  private _registerEvents(eventBus: EventBus) {
     eventBus.on(BaseBlock.EVENTS.INIT, this.init.bind(this));
     eventBus.on(BaseBlock.EVENTS.FLOW_CMD, this._componentDidMount.bind(this));
     eventBus.on(BaseBlock.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
@@ -97,13 +97,13 @@ class BaseBlock {
     Object.assign(this.props, nextProps);
   };
 
-  _createResources() {
+  private _createResources() {
     const { tagName } = this._meta;
     const tag = tagName as string;
     this._element = this._createDocumentElement(tag);
   }
 
-  _createDocumentElement(tagName: string) {
+  private _createDocumentElement(tagName: string) {
     const element = document.createElement(tagName);
     element.setAttribute('data-id', this._id);
     return element;
@@ -113,7 +113,7 @@ class BaseBlock {
     this.eventBus().emit(BaseBlock.EVENTS.FLOW_CMD);
   }
 
-  _componentDidMount() {
+  private _componentDidMount() {
     this.componentDidMount();
     Object.values(this.children).forEach(child => {
       child.dispatchComponentDidMount();
@@ -123,7 +123,7 @@ class BaseBlock {
 
   componentDidMount() { }
 
-  _componentDidUpdate() {
+  private _componentDidUpdate() {
     const response = this.componentDidUpdate();
     if (!response) {
       return false;
@@ -136,7 +136,7 @@ class BaseBlock {
     return true;
   }
 
-  _addEvents() {
+  private _addEvents() {
     const { events = {} } = this.props;
 
     const directElementName = this.props.eventsTo;
@@ -156,7 +156,7 @@ class BaseBlock {
     });
   }
 
-  _removeEvents() {
+  private _removeEvents() {
     const { events = {} } = this.props;
 
     Object.keys(events).forEach(eventName => {
@@ -164,7 +164,7 @@ class BaseBlock {
     });
   }
 
-  _render() {
+  private _render() {
     const _block = this.render();
     const block = _block as unknown as Node;
     this._removeEvents();
@@ -181,7 +181,7 @@ class BaseBlock {
     // Переопределяется пользователем. => Разметку
   }
 
-  _makePropsProxy(props: Record<string, unknown>) {
+  private _makePropsProxy(props: Record<string, unknown>) {
     const self = this;
     return new Proxy(props, {
       get(target: Record<string | symbol, unknown>, p: string | symbol): any {
