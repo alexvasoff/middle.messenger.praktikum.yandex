@@ -6,7 +6,7 @@
     "node": ">12.0.0"
   },
   "scripts": {
-    "start": "node ./server.js",
+    "start": "npx webpack && node ./server.js",
     "build": "webpack --mode=production --node-env=production",
     "test": "mocha --require ts-node/register --require ./mochaSetup.js './src/**/*.test.ts'",
     "build:dev": "webpack --mode=development",
