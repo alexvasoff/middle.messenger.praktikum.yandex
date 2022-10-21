@@ -32,4 +32,10 @@ export class Input extends BaseBlock {
   render() {
     return tpl(this.props);
   }
+
+  getValue() {
+    const inputField: HTMLInputElement = this.element.getElementsByTagName('input')[0];
+    const value = inputField.value;
+    return value;
+  }
 }
