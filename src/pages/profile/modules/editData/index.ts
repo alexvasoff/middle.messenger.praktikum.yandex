@@ -59,7 +59,7 @@ export class ProfileEditDataPage extends BaseBlock {
   }
 
   async componentDidMount() {
-    const userInfo = await authController.getInfo();
+    const userInfo = await authController.getInfo() as unknown as Record<string, unknown>;
     if (!userInfo) {
       return;
     }

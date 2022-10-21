@@ -5,4 +5,5 @@ import { Input } from '../../../../components/input';
 export interface Props extends BaseProps {
   messageRow: Input;
   sendButton: Button;
+  messages?: Array<any>;
 }

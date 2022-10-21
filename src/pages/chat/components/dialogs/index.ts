@@ -6,6 +6,7 @@ import { ChatController } from '../../../../api/apiControllers/chat';
 import { UserAuthController } from '../../../../api/apiControllers/userAuth';
 import { baseWSUrl } from '../../../../../config';
 import { store } from '../../../../utils/store';
+import { fetchAllMessages } from '../../utils/fetchAllMessages';
 
 const chatController = new ChatController();
 const authController = new UserAuthController();
@@ -26,10 +27,7 @@ async function openChat(chat: Dialog) {
   socket.addEventListener('open', () => {
     console.log('Соединение установлено');
 
-    socket.send(JSON.stringify({
-      content: 'Моё первое сообщение миру!',
-      type: 'message',
-    }));
+    fetchAllMessages(CHAT_ID, TOKEN_VALUE);
   });
 
   socket.addEventListener('close', event => {
