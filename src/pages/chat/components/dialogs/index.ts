@@ -5,6 +5,7 @@ import { Dialog, Dialogs as DialogsProps } from './types';
 import { ChatController } from '../../../../api/apiControllers/chat';
 import { UserAuthController } from '../../../../api/apiControllers/userAuth';
 import { baseWSUrl } from '../../../../../config';
+import { store } from '../../../../utils/store';
 
 const chatController = new ChatController();
 const authController = new UserAuthController();
@@ -48,6 +49,7 @@ async function openChat(chat: Dialog) {
   socket.addEventListener('error', event => {
     console.log('Ошибка', (<Error><unknown>event).message);
   });
+  store.set('chatSocket', socket);
 }
 
 export class Dialogs extends BaseBlock {
