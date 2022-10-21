@@ -18,8 +18,16 @@ export class ChatContent extends BaseBlock {
 }
 
 function sendMessage(messageRow: Input) {
-  const messageText = messageRow.getValue();
   const chatSocket = store.getState().chatSocket as unknown as WebSocket;
+  if (!chatSocket) {
+    alert('Выберите чат');
+    return;
+  }
+  const messageText = messageRow.getValue();
+  if (!messageText) {
+    alert('Введите чего-нибудь');
+    return;
+  }
   const messageToChat = JSON.stringify({
     content: messageText,
     type: 'message',
