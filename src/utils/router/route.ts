@@ -1,37 +1,44 @@
 import { renderDOM } from '../renderDOM';
+import { BaseBlock } from '../baseBlock';
+
+export interface BlockConstructor<P = unknown>{
+  new(props?: P): BaseBlock;
+}
 
 export class Route {
-  constructor(pathname, view, props) {
-    this._pathname = pathname;
-    this._blockClass = view;
-    this._block = null;
-    this._props = props;
-  }
+  private block: BaseBlock | null = null;
 
-  navigate(pathname) {
+  constructor(
+    private pathname: string,
+    private readonly blockClass: BlockConstructor,
+    private readonly props: Record<string, unknown>,
+  ) {}
+
+  navigate(pathname: string) {
     if (this.match(pathname)) {
-      this._pathname = pathname;
+      this.pathname = pathname;
       this.render();
     }
   }
 
   leave() {
-    if (this._block) {
-      this._block.hide();
+    if (this.block) {
+      this.block.hide();
     }
   }
 
-  match(pathname) {
-    return pathname === this._pathname;
+  match(pathname: string) {
+    return pathname === this.pathname;
   }
 
   render() {
-    if (!this._block) {
-      this._block = new this._blockClass();
-      renderDOM(this._props.rootQuery, this._block);
+    if (!this.block) {
+      this.block = new this.blockClass();
+      const rootQuery = this.props.rootQuery as string;
+      renderDOM(rootQuery, this.block);
       return;
     }
 
-    this._block.show();
+    this.block.show();
   }
 }

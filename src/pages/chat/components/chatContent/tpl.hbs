@@ -8,7 +8,14 @@
         </div>
         <div class="top-bar__actions">...</div>
     </div>
-    <div class="content"></div>
+    <div class="content">
+      {{#each messages}}
+        <div class="message">
+          <div class="message__user">от {{ this.user_id }}</div>
+          <div class="message__text">{{ this.content }}</div>
+        </div>
+      {{/each}}
+    </div>
     <div class="message-bar">
         <div class="message-bar__attachment"></div>
         <div class="message-bar__message-row">

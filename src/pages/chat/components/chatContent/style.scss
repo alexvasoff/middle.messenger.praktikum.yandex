@@ -30,6 +30,33 @@
   }
 }
 
+.content {
+
+  border: 1px solid #FF0000;
+  display: block;
+  height: 90%;
+  width: 95%;
+  overflow: scroll;
+  align-self: flex-start;
+  align-items: flex-start;
+}
+
 .message-bar {
   display: flex;
+}
+
+.message {
+  margin-bottom: 2rem;
+
+  &__user {
+    //font-size: 8px;
+    font-weight: bold;
+    padding-left: .5rem;
+    margin-bottom: .4rem;
+  }
+
+  &__text {
+    padding-left: 1.5rem;
+  }
+
 }

@@ -1,14 +1,33 @@
 {
+  "ts-node": {
+    "files": true
+  },
   "compilerOptions": {
     "module": "commonjs",
+    "moduleResolution": "Node",
     "target": "es2017",
     "sourceMap": true,
     "noImplicitAny": true,
     "noImplicitReturns": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "strictNullChecks": true
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "lib": [
+      "ESNext",
+      "DOM.Iterable",
+      "DOM"
+    ],
+    "baseUrl": "src",
+    "paths": {
+      "@/*": [
+        "*"
+      ]
+    }
   },
+  "include": [
+    "src/typings"
+  ],
   "exclude": [
     "node_modules"
   ]

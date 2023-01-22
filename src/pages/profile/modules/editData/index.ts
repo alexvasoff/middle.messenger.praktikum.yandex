@@ -10,6 +10,7 @@ import { UserAuthController } from '../../../../api/apiControllers/userAuth';
 import { UserProfileController } from '../../../../api/apiControllers/userProfile';
 import { getFormData } from '../../../../utils/getFormData';
 import { setFormData } from '../../../../utils/setFormData';
+import { EditData } from '../../../../api/types';
 
 const authController = new UserAuthController();
 const profileController = new UserProfileController();
@@ -19,7 +20,7 @@ function goBack() {
 }
 
 async function editData() {
-  const formData = getFormData();
+  const formData = getFormData() as unknown as EditData;
   await profileController.editData(formData);
 }
 
@@ -57,8 +58,8 @@ export class ProfileEditDataPage extends BaseBlock {
     return this.compile(tpl, this.props);
   }
 
-  async componentDidMount(oldProps) {
-    const userInfo = await authController.getInfo();
+  async componentDidMount() {
+    const userInfo = await authController.getInfo() as unknown as Record<string, unknown>;
     if (!userInfo) {
       return;
     }

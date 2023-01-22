@@ -16,6 +16,10 @@ export interface EditData extends Omit<SignUp, 'password'>{
   display_name: string;
 }
 
+export interface UserData extends EditData {
+  id: number;
+}
+
 export interface ChangePassword {
   oldPassword: string;
   newPassword: string;

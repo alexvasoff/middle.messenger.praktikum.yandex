@@ -10,8 +10,3 @@ export class LoginApi extends BaseAPI {
     return loginApiInstance.post(apiPath.login, { data });
   }
 }
-
-/*
-* Кажется, что для логина/выхода можно имплементировать метод request, а не create
-* Но тут ведь правильнее смотреть на метод запроса? В апи используется post => дергаем его через метод create?
-*/

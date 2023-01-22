@@ -5,7 +5,7 @@ import { apiPath } from '../apiPath';
 const tokenApiInstance = new HTTPTransport();
 
 export class ChatTokenApi extends BaseAPI {
-  create(id: string) {
+  create(id: string | number) {
     return tokenApiInstance.post(apiPath.getChatToken + id);
   }
 }

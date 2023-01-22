@@ -21,7 +21,7 @@ export const phoneReg = /^\+?\d{9,15}$/;
 // не должно быть пустым.
 export const messageReg = /.*/;
 
-export const regExp = {
+export const regExp: Record<InputFieldName, RegExp> = {
   name: nameReg,
   first_name: nameReg,
   second_name: nameReg,
@@ -29,8 +29,13 @@ export const regExp = {
   email: emailReg,
   password: passwordReg,
   passwordGuard: passwordReg,
+  oldPassword: passwordReg,
+  newPassword: passwordReg,
+  newPasswordGuard: passwordReg,
   phone: phoneReg,
   message: messageReg,
+  search: messageReg,
+  display_name: messageReg,
 };
 
 export function validate(fieldName: InputFieldName, value: string) : boolean {

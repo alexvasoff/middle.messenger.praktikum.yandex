@@ -80,7 +80,7 @@ export class ProfileMainPage extends BaseBlock {
 
   async componentDidMount() {
     const authController = new UserAuthController();
-    const userInfo = await authController.getInfo();
+    const userInfo = await authController.getInfo() as unknown as Record<string, unknown>;
     if (!userInfo) {
       return;
     }

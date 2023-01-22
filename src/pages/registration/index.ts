@@ -7,9 +7,10 @@ import { Props as RegistrationProps } from './types';
 import { router } from '../../router';
 import { UserAuthController } from '../../api/apiControllers/userAuth';
 import { getFormData } from '../../utils/getFormData';
+import {SignUp} from "../../api/types";
 
 async function onRegister() {
-  const params = getFormData();
+  const params = getFormData() as unknown as SignUp;
   const authController = new UserAuthController();
   await authController.signUp(params);
 }

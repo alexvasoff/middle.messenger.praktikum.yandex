@@ -5,6 +5,6 @@ export function setFormData(data: Record<string, unknown>) {
     if (!data[fieldName] || fieldName === 'avatar') {
       continue;
     }
-    inputField.value = data[fieldName];
+    inputField.value = <string>data[fieldName];
   }
 }

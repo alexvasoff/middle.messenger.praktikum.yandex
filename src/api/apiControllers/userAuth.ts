@@ -1,6 +1,6 @@
 import { store } from '../../utils/store';
 import { router } from '../../router';
-import { LoginData, SignUp } from '../types';
+import { LoginData, SignUp, UserData } from '../types';
 
 import { LoginApi } from '../apiModules/loginApi';
 import { LogoutApi } from '../apiModules/logoutApi';
@@ -29,8 +29,8 @@ export class UserAuthController {
     router.go('/');
   }
 
-  public getInfo() {
-    const cache = store.getState().me;
+  public getInfo(): Promise<UserData> {
+    const cache: UserData = store.getState().me;
     if (cache && Object.keys(cache)) {
       return new Promise(resolve => {
         resolve(cache);
@@ -39,7 +39,7 @@ export class UserAuthController {
     return new Promise((resolve, reject) => {
       const userApi = new UserApi();
       userApi.request().then(response => {
-        let userInfo = null;
+        let userInfo: UserData;
         if (response instanceof XMLHttpRequest) {
           if (response.status !== 200) {
             router.go('/');
